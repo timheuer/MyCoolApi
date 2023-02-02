@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Hosting;
+using System.Runtime.InteropServices;
 
 namespace MyCoolApi.Tests;
 
@@ -13,6 +14,24 @@ public class MathTests {
         var client = application.CreateClient();
         var sum = await client.GetStringAsync("/add/1,1");
         Assert.AreEqual(2, Convert.ToInt32(sum));
+    }
+
+    [TestMethod]
+    public void Running_On_Linux() {
+        Console.WriteLine(RuntimeInformation.OSDescription);
+        Assert.IsTrue(RuntimeInformation.IsOSPlatform(OSPlatform.Linux));
+    }
+
+    [TestMethod]
+    public void Running_In_WSL() {
+        Console.WriteLine(RuntimeInformation.OSDescription);
+        Assert.IsTrue(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && RuntimeInformation.OSDescription.Contains("WSL"));
+    }
+
+    [TestMethod]
+    public void Running_On_Windows() {
+        Console.WriteLine(RuntimeInformation.OSDescription);
+        Assert.IsTrue(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
     }
 
     [TestMethod]
