@@ -17,24 +17,6 @@ public class MathTests {
     }
 
     [TestMethod]
-    public void Running_On_Linux() {
-        Console.WriteLine(RuntimeInformation.OSDescription);
-        Assert.IsTrue(RuntimeInformation.IsOSPlatform(OSPlatform.Linux));
-    }
-
-    [TestMethod]
-    public void Running_In_WSL() {
-        Console.WriteLine(RuntimeInformation.OSDescription);
-        Assert.IsTrue(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && RuntimeInformation.OSDescription.Contains("WSL"));
-    }
-
-    [TestMethod]
-    public void Running_On_Windows() {
-        Console.WriteLine(RuntimeInformation.OSDescription);
-        Assert.IsTrue(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
-    }
-
-    [TestMethod]
     public async Task One_Plus_Two_Is_Three() {
         await using var application = new MyCoolApiApp();
 

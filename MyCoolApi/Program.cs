@@ -1,4 +1,5 @@
 using MyCoolApi;
+using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,10 @@ app.MapGet("/hello/{name}", (string name) => {
 
 app.MapGet("/bye/{name}", (string name) => {
     return HelloBuilders.SayGoodbye(name);
+});
+
+app.MapGet("/env", () => {
+    return RuntimeInformation.OSDescription;
 });
 
 app.MapGet("/weatherforecast", () => {
