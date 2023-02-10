@@ -60,6 +60,15 @@ public class MathTests {
         var product = await client.GetStringAsync("/multiply/4,5");
         Assert.AreEqual(20, Convert.ToInt32(product));
     }
+
+    [TestMethod]
+    public async Task Half_Of_Twelve() {
+        await using var application = new MyCoolApiApp();
+
+        var client = application.CreateClient();
+        var product = await client.GetStringAsync("/divide/12");
+        Assert.AreEqual(6, Convert.ToDouble(product));
+    }
 }
 
 

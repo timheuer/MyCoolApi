@@ -47,6 +47,11 @@ app.MapGet("/env", () => {
     return RuntimeInformation.OSDescription;
 });
 
+app.MapGet("/divide/{num1}", (int num1)=>
+{
+    return MathHelpers.DivideInHalf(num1);
+});
+
 app.MapGet("/weatherforecast", () => {
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
