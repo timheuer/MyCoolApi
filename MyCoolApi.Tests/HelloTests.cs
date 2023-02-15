@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Hosting;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace MyCoolApi.Tests;
@@ -23,6 +24,7 @@ public class HelloTests {
 
         var client = application.CreateClient();
         var hello = await client.GetStringAsync("/bye/felicia");
+        Debug.WriteLine(hello);
         Assert.AreEqual("Bye Felicia!", hello);
     }
 }
