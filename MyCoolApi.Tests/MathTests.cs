@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.Hosting;
 using System.Runtime.InteropServices;
 
 namespace MyCoolApi.Tests;
@@ -68,12 +66,5 @@ public class MathTests {
         var client = application.CreateClient();
         var product = await client.GetStringAsync("/divide/12");
         Assert.AreEqual(6, Convert.ToDouble(product));
-    }
-}
-
-
-class MyCoolApiApp : WebApplicationFactory<Program> {
-    protected override IHost CreateHost(IHostBuilder builder) {
-        return base.CreateHost(builder);
     }
 }
