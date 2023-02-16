@@ -48,7 +48,8 @@ app.MapGet("/env", () => {
     return RuntimeInformation.OSDescription;
 });
 
-app.MapGet("/weatherforecast", () => {
+app.MapGet("/weatherforecast", () =>
+{
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
@@ -59,8 +60,7 @@ app.MapGet("/weatherforecast", () => {
         .ToArray();
     return forecast;
 })
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+.WithName("GetWeatherForecast");
 
 app.Run();
 
