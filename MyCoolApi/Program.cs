@@ -45,13 +45,6 @@ app.MapGet("/bye/{name}", (string name) => {
 
 app.MapGet("/env", () => {
 
-    // check if running in WSL
-    var wsl = false;
-    if (RuntimeInformation.OSDescription.Contains("WSL") && File.Exists("/proc/sys/kernel/osrelease"))
-    {
-        wsl = true;
-    }
-
     return RuntimeInformation.OSDescription;
 });
 

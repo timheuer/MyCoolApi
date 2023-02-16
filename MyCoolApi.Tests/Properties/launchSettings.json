@@ -2,6 +2,9 @@
   "profiles": {
     "MyCoolApi.Tests": {
       "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
     }
   }
 }
