@@ -1,4 +1,6 @@
-﻿namespace MyCoolApi;
+﻿using System.Text;
+
+namespace MyCoolApi;
 
 public class MathHelpers {
     
@@ -17,4 +19,15 @@ public class MathHelpers {
             1 => 1,
             _ => Fibonacci(i - 1).Last() + Fibonacci(i - 2).Last()
         }).ToArray();
+
+    public static int Factorial(int num)
+        => num switch {
+            0 => 1,
+            _ => num * Factorial(num - 1)
+        };
+
+    public static double DivideInHalf(int number)
+    {
+        return number / 2;
+    }
 }

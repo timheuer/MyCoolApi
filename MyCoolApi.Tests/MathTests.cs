@@ -53,21 +53,21 @@ public class MathTests {
     }
 
     [TestMethod]
-    public async Task Hello_To_Tim() {
+    public async Task Four_Times_Five_Is_Twenty() {
         await using var application = new MyCoolApiApp();
 
         var client = application.CreateClient();
-        var hello = await client.GetStringAsync("/hello/tim");
-        Assert.AreEqual("Hello Tim", hello);
+        var product = await client.GetStringAsync("/multiply/4,5");
+        Assert.AreEqual(20, Convert.ToInt32(product));
     }
 
     [TestMethod]
-    public async Task Goodbye_To_Felicia() {
+    public async Task Half_Of_Twelve() {
         await using var application = new MyCoolApiApp();
 
         var client = application.CreateClient();
-        var hello = await client.GetStringAsync("/bye/felicia");
-        Assert.AreEqual("Bye Felicia!", hello);
+        var product = await client.GetStringAsync("/divide/12");
+        Assert.AreEqual(6, Convert.ToDouble(product));
     }
 }
 
