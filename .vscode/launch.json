@@ -1,5 +1,11 @@
 {
     "version": "0.2.0",
+    "compounds": [
+        {
+            "name": "All",
+            "configurations": ["MyCoolApi"]
+        }
+    ],
     "configurations": [
         {
             // Use IntelliSense to find out which attributes exist for C# debugging
