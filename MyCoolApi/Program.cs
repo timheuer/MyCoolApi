@@ -35,6 +35,11 @@ app.MapGet("/multiply/{num1},{num2}", (int num1, int num2) => {
     return MathHelpers.Multiply(num1, num2);
 });
 
+app.MapGet("/doubleit/{num1}", (int num1) =>
+{
+    return MathHelpers.MultiplyByTwo(num1);
+});
+
 app.MapGet("/hello/{name}", (string name) => {
     return HelloBuilders.SayHello(name);
 });

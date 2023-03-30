@@ -30,4 +30,9 @@ public class MathHelpers {
     {
         return number / 2;
     }
+
+    public static double MultiplyByTwo(int number)
+    {
+        return number * 2;
+    }
 }
