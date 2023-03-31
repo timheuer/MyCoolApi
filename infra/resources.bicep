@@ -13,6 +13,7 @@ resource api 'Microsoft.Web/sites@2021-01-15' = {
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
+      linuxFxVersion: 'DOTNETCORE|7.0'
       ftpsState: 'FtpsOnly'
     }
     httpsOnly: true
@@ -61,7 +62,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2021-03-01' = {
   }
   tags: tags
   sku: {
-    name: 'S1'
+    name: 'P2V3'
   }
 }
 
