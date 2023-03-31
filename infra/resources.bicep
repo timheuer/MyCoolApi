@@ -9,11 +9,9 @@ resource api 'Microsoft.Web/sites@2021-01-15' = {
   tags: union(tags, {
       'azd-service-name': 'api'
     })
-  kind: 'app,linux'
+  kind: 'app'
   properties: {
-    serverFarmId: appServicePlan.id
     siteConfig: {
-      alwaysOn: true
       ftpsState: 'FtpsOnly'
     }
     httpsOnly: true
@@ -56,9 +54,13 @@ resource api 'Microsoft.Web/sites@2021-01-15' = {
 resource appServicePlan 'Microsoft.Web/serverfarms@2021-03-01' = {
   name: 'plan-${resourceToken}'
   location: location
+  kind: 'linux'
+  properties: {
+    reserved: true
+  }
   tags: tags
   sku: {
-    name: 'B1'
+    name: 'S1'
   }
 }
 
