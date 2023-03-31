@@ -11,6 +11,7 @@ resource api 'Microsoft.Web/sites@2021-01-15' = {
     })
   kind: 'app'
   properties: {
+    serverFarmId: appServicePlan.id
     siteConfig: {
       ftpsState: 'FtpsOnly'
     }
