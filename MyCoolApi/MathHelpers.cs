@@ -2,8 +2,9 @@
 
 namespace MyCoolApi;
 
-public class MathHelpers {
-    
+public class MathHelpers
+{
+
     public static int Add(int num1, int num2)
         => num1 + num2;
 
@@ -11,17 +12,26 @@ public class MathHelpers {
         => num1 - num2;
 
     public static int Multiply(int num1, int num2)
-        => num1 * num2;
+        => num1 * num2; public static int[] Fibonacci(int num)
+    {
+        if (num <= 0) return Array.Empty<int>();
+        if (num == 1) return new[] { 0 };
 
-    public static int[] Fibonacci(int num)
-        => Enumerable.Range(0, num).Select(i => i switch {
-            0 => 0,
-            1 => 1,
-            _ => Fibonacci(i - 1).Last() + Fibonacci(i - 2).Last()
-        }).ToArray();
+        var result = new int[num];
+        result[0] = 0;
+        result[1] = 1;
+
+        for (int i = 2; i < num; i++)
+        {
+            result[i] = result[i - 1] + result[i - 2];
+        }
+
+        return result;
+    }
 
     public static int Factorial(int num)
-        => num switch {
+        => num switch
+        {
             0 => 1,
             _ => num * Factorial(num - 1)
         };
