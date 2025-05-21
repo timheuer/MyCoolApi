@@ -8,6 +8,13 @@ namespace MyCoolApi.Tests;
 [TestClass]
 public class OSTests
 {
+    [TestMethod]
+    // FYI, this is a newly added attribute that inherits from the customizable ConditionBaseAttribute.
+    [OSCondition(OperatingSystems.Linux)]
+    public void RunsOnlyWhenOSIsLinux()
+    {
+        Assert.IsTrue(RuntimeInformation.IsOSPlatform(OSPlatform.Linux));
+    }
 
     [TestMethod]
     public void Running_On_Linux()
