@@ -52,4 +52,6 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Test
-      run: dotnet test
+      # Arguments before `--` are consumed by `dotnet test`, and arguments after `--` are passed to the app (MTP).
+      # More info: https://learn.microsoft.com/dotnet/core/testing/microsoft-testing-platform-integration-dotnet-test
+      run: dotnet test --configuration Release --no-build -- --report-trx --coverage

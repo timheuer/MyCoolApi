@@ -1,20 +1,33 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <EnableMSTestRunner>true</EnableMSTestRunner>
+    <!--
+	    If .NET 10 SDK is installed, this property can be removed and instead you can enable the MTP dotnet test experience,
+		see https://learn.microsoft.com/dotnet/core/tools/dotnet-test?tabs=dotnet-test-with-vstest#description.
+	-->
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
     <IsPackable>false</IsPackable>
-
+	<!-- 
+	    This cannot be done automatically through activation of `EnableMSTestRunner` because of some limitation in MSBuild.
+		The change is relatively complex as it would involve changes in .NET SDK and NuGet.
+	-->
+	<OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.0" />
     <PackageReference Include="MSTest" Version="3.8.3" />
-    <PackageReference Include="coverlet.collector" Version="3.1.2" />
+	<!--
+		Below are 2 optional additional packages providing extra functionality for MTP.
+		/!\ They have special licensing requiring you to have some MS product license (VS, Azure, ADO, GH, Copilot...).
+	-->
+	<PackageReference Include="Microsoft.Testing.Extensions.HotReload" Version="1.6.3" />
+	<PackageReference Include="Microsoft.Testing.Extensions.Retry" Version="1.6.3" />
   </ItemGroup>
 
   <ItemGroup>
