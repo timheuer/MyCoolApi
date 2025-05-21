@@ -1,7 +1,16 @@
 {
   "profiles": {
     "MyCoolApi.Tests": {
-      "commandName": "Project"
+      "commandName": "Project",
+      // With MTP, your test app is now a regular application, so you can run it with the command line arguments you would normally use for a console app.
+      // Note that you don't need the `--` prefix as there is no VSTest `dotnet test` pre-processing step.
+      "commandLineArgs": "--report-trx --coverage",
+      "environmentVariables": {
+        // Enable the line below to experiment with MSTest support for hot reload. This is a MTP feature that requires special support in the test framework.
+        // Currently, only MSTest supports this feature.
+        // See https://learn.microsoft.com/dotnet/core/testing/microsoft-testing-platform-extensions-hosting
+        // "TESTINGPLATFORM_HOTRELOAD_ENABLED": "1"
+      }
     },
     "Docker": {
       "commandName": "Docker"
