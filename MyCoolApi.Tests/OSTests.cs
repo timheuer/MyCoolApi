@@ -10,6 +10,7 @@ public class OSTests
 {
 
     [TestMethod]
+    [OSCondition(ConditionMode.Include, OperatingSystems.Linux)]
     public void Running_On_Linux()
     {
         Debug.WriteLine(RuntimeInformation.OSDescription);
@@ -17,6 +18,7 @@ public class OSTests
     }
 
     [TestMethod]
+    [OSCondition(ConditionMode.Include, OperatingSystems.Linux)]
     public void Running_In_WSL()
     {
         Debug.WriteLine(RuntimeInformation.OSDescription);
@@ -24,6 +26,7 @@ public class OSTests
     }
 
     [TestMethod]
+    [OSCondition(ConditionMode.Include, OperatingSystems.Windows)]
     public void Running_On_Windows()
     {
         Debug.WriteLine(RuntimeInformation.OSDescription);
@@ -31,6 +34,7 @@ public class OSTests
     }
 
     [TestMethod]
+    [OSCondition(ConditionMode.Include, OperatingSystems.OSX)]
     public void Running_On_MacOS()
     {
         Debug.WriteLine(RuntimeInformation.OSDescription);
