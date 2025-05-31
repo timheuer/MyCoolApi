@@ -1,10 +1,17 @@
 <Solution>
+  <Folder Name="/Components/">
+    <Project Path="ClassLibrary1/ClassLibrary1.csproj" />
+  </Folder>
+  <Folder Name="/Components/Sub/">
+    <Project Path="ClassLib2/ClassLib2.csproj" />
+  </Folder>
   <Folder Name="/New Folder/" />
   <Folder Name="/Solution Items/">
     <File Path="azure.yaml" />
     <File Path="playground.http" />
     <File Path="testEnvironments.json" />
   </Folder>
+  
   <Project Path="MyCoolApi.Tests/MyCoolApi.Tests.csproj" />
   <Project Path="MyCoolApi/MyCoolApi.csproj" />
   <Project Path="UtilsLib/UtilsLib.csproj" />
