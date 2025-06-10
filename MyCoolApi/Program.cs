@@ -1,5 +1,5 @@
-using MyCoolApi;
 using System.Runtime.InteropServices;
+using MyCoolApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +9,8 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) {
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -21,17 +22,20 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/add/{num1},{num2}", (int num1, int num2) => {
+app.MapGet("/add/{num1},{num2}", (int num1, int num2) =>
+{
 
     var result = MathHelpers.Add(num1, num2);
     return result;
 });
 
-app.MapGet("/fibonacci/{num}", (int num) => {
+app.MapGet("/fibonacci/{num}", (int num) =>
+{
     return MathHelpers.Fibonacci(num);
 });
 
-app.MapGet("/multiply/{num1},{num2}", (int num1, int num2) => {
+app.MapGet("/multiply/{num1},{num2}", (int num1, int num2) =>
+{
     return MathHelpers.Multiply(num1, num2);
 });
 
@@ -40,25 +44,29 @@ app.MapGet("/doubleit/{num1}", (int num1) =>
     return MathHelpers.MultiplyByTwo(num1);
 });
 
-app.MapGet("/hello/{name}", (string name) => {
+app.MapGet("/hello/{name}", (string name) =>
+{
     return HelloBuilders.SayHello(name);
 });
 
-app.MapGet("/bye/{name}", (string name) => {
+app.MapGet("/bye/{name}", (string name) =>
+{
     return HelloBuilders.SayGoodbye(name);
 });
 
-app.MapGet("/env", () => {
+app.MapGet("/env", () =>
+{
 
     return RuntimeInformation.OSDescription;
 });
 
-app.MapGet("/divide/{num1}", (int num1)=>
+app.MapGet("/divide/{num1}", (int num1) =>
 {
     return MathHelpers.DivideInHalf(num1);
 });
 
-app.MapGet("/weatherforecast", () => {
+app.MapGet("/weatherforecast", () =>
+{
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
@@ -73,7 +81,8 @@ app.MapGet("/weatherforecast", () => {
 
 app.Run();
 
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary) {
+public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+{
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
 
