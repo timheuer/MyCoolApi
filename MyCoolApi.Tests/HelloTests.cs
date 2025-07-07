@@ -96,4 +96,87 @@ public class HelloTests
         Assert.AreEqual("Bye A!", HelloBuilders.SayGoodbye("a"));
         Assert.AreEqual("Bye Z!", HelloBuilders.SayGoodbye("z"));
     }
+
+    // Unit tests for SayCaps method
+    [TestMethod]
+    public void SayCaps_Unit_Test()
+    {
+        Assert.AreEqual("HELLO", HelloBuilders.SayCaps("hello"));
+        Assert.AreEqual("WORLD", HelloBuilders.SayCaps("world"));
+        Assert.AreEqual("TESTING", HelloBuilders.SayCaps("TESTING"));
+    }
+
+    [TestMethod]
+    public void SayCaps_With_Mixed_Case()
+    {
+        Assert.AreEqual("HELLO WORLD", HelloBuilders.SayCaps("Hello World"));
+        Assert.AreEqual("MIXED CASE TEXT", HelloBuilders.SayCaps("MiXeD cAsE tExT"));
+        Assert.AreEqual("ALREADY CAPS", HelloBuilders.SayCaps("ALREADY CAPS"));
+    }
+
+    [TestMethod]
+    public void SayCaps_With_Special_Characters()
+    {
+        Assert.AreEqual("HELLO-WORLD!", HelloBuilders.SayCaps("hello-world!"));
+        Assert.AreEqual("TEST@EMAIL.COM", HelloBuilders.SayCaps("test@email.com"));
+        Assert.AreEqual("123 NUMBER TEST", HelloBuilders.SayCaps("123 number test"));
+        Assert.AreEqual("SPECIAL #$%& CHARS", HelloBuilders.SayCaps("special #$%& chars"));
+    }
+
+    [TestMethod]
+    public void SayCaps_With_Single_Character()
+    {
+        Assert.AreEqual("A", HelloBuilders.SayCaps("a"));
+        Assert.AreEqual("Z", HelloBuilders.SayCaps("z"));
+        Assert.AreEqual("5", HelloBuilders.SayCaps("5"));
+    }
+
+    [TestMethod]
+    public void SayCaps_With_Empty_And_Whitespace()
+    {
+        Assert.AreEqual("", HelloBuilders.SayCaps(""));
+        Assert.AreEqual(" ", HelloBuilders.SayCaps(" "));
+        Assert.AreEqual("   ", HelloBuilders.SayCaps("   "));
+    }
+
+    // Integration tests for /caps endpoint
+    [TestMethod]
+    public async Task Caps_Endpoint_Lowercase_Text()
+    {
+        await using var application = new MyCoolApiApp();
+        var client = application.CreateClient();
+
+        var result = await client.GetStringAsync("/caps/hello");
+        Assert.AreEqual("HELLO", result);
+    }
+
+    [TestMethod]
+    public async Task Caps_Endpoint_Mixed_Case_Text()
+    {
+        await using var application = new MyCoolApiApp();
+        var client = application.CreateClient();
+
+        var result = await client.GetStringAsync("/caps/Hello%20World");
+        Assert.AreEqual("HELLO WORLD", result);
+    }
+
+    [TestMethod]
+    public async Task Caps_Endpoint_With_Special_Characters()
+    {
+        await using var application = new MyCoolApiApp();
+        var client = application.CreateClient();
+
+        var result = await client.GetStringAsync("/caps/test-123");
+        Assert.AreEqual("TEST-123", result);
+    }
+
+    [TestMethod]
+    public async Task Caps_Endpoint_Already_Uppercase()
+    {
+        await using var application = new MyCoolApiApp();
+        var client = application.CreateClient();
+
+        var result = await client.GetStringAsync("/caps/ALREADY%20CAPS");
+        Assert.AreEqual("ALREADY CAPS", result);
+    }
 }

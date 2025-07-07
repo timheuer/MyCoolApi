@@ -54,6 +54,11 @@ app.MapGet("/bye/{name}", (string name) =>
     return HelloBuilders.SayGoodbye(name);
 });
 
+app.MapGet("/caps/{text}", (string text) =>
+{
+    return HelloBuilders.SayCaps(text);
+});
+
 app.MapGet("/env", () =>
 {
 

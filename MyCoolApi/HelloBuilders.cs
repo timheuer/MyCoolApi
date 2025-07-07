@@ -7,4 +7,7 @@ public class HelloBuilders {
     
     public static string SayGoodbye(string name)
         => $"Bye {System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name)}!";
+    
+    public static string SayCaps(string text)
+        => text.ToUpper();
 }
