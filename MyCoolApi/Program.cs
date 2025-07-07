@@ -65,6 +65,19 @@ app.MapGet("/divide/{num1}", (int num1) =>
     return MathHelpers.DivideInHalf(num1);
 });
 
+app.MapGet("/casing/{input}/{caseType}", (string input, string caseType) =>
+{
+    try
+    {
+        var result = StringCasingHelpers.ConvertCase(input, caseType);
+        return Results.Ok(result);
+    }
+    catch (ArgumentException ex)
+    {
+        return Results.BadRequest(ex.Message);
+    }
+});
+
 app.MapGet("/weatherforecast", () =>
 {
     var forecast = Enumerable.Range(1, 5).Select(index =>
