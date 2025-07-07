@@ -1,1 +1,36 @@
 GET https://www.thunderclient.com/welcome
+
+###
+
+# String Casing API Tests
+# Demo of the new string casing conversion endpoints
+
+### Convert to PascalCase
+GET http://localhost:5250/casing/hello_world_test/pascal
+
+### Convert to camelCase
+GET http://localhost:5250/casing/hello_world_test/camel
+
+### Convert to snake_case
+GET http://localhost:5250/casing/HelloWorldTest/snake
+
+### Convert to kebab-case
+GET http://localhost:5250/casing/HelloWorldTest/kebab
+
+### Convert to sentence case
+GET http://localhost:5250/casing/HelloWorldTest/sentence
+
+### Convert to Title Case
+GET http://localhost:5250/casing/hello_world_test/title
+
+### Convert to UPPER_CASE
+GET http://localhost:5250/casing/HelloWorldTest/upper
+
+### Convert to lowercase
+GET http://localhost:5250/casing/HelloWorldTest/lower
+
+### Test error handling with invalid case type
+GET http://localhost:5250/casing/hello/invalid
+
+### Test with special characters and mixed formats
+GET http://localhost:5250/casing/my-cool_API_example/pascal
