@@ -34,3 +34,109 @@ GET http://localhost:5250/casing/hello/invalid
 
 ### Test with special characters and mixed formats
 GET http://localhost:5250/casing/my-cool_API_example/pascal
+
+###
+
+# Alexa Skill API Tests
+# Demo of the new Alexa integration endpoints
+
+### Alexa Launch Request
+POST http://localhost:5250/alexa
+Content-Type: application/json
+
+{
+  "version": "1.0",
+  "session": {
+    "sessionId": "test-session",
+    "application": {
+      "applicationId": "test-app"
+    },
+    "new": true
+  },
+  "request": {
+    "type": "LaunchRequest",
+    "requestId": "test-request"
+  }
+}
+
+### Alexa Add Numbers Intent
+POST http://localhost:5250/alexa
+Content-Type: application/json
+
+{
+  "version": "1.0",
+  "session": {
+    "sessionId": "test-session",
+    "application": {
+      "applicationId": "test-app"
+    },
+    "new": false
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "test-request",
+    "intent": {
+      "name": "AddNumbersIntent",
+      "slots": {
+        "FirstNumber": {
+          "name": "FirstNumber",
+          "value": "5"
+        },
+        "SecondNumber": {
+          "name": "SecondNumber",
+          "value": "3"
+        }
+      }
+    }
+  }
+}
+
+### Alexa Say Hello Intent
+POST http://localhost:5250/alexa
+Content-Type: application/json
+
+{
+  "version": "1.0",
+  "session": {
+    "sessionId": "test-session",
+    "application": {
+      "applicationId": "test-app"
+    },
+    "new": false
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "test-request",
+    "intent": {
+      "name": "SayHelloIntent",
+      "slots": {
+        "Name": {
+          "name": "Name",
+          "value": "Tim"
+        }
+      }
+    }
+  }
+}
+
+### Alexa Help Intent
+POST http://localhost:5250/alexa
+Content-Type: application/json
+
+{
+  "version": "1.0",
+  "session": {
+    "sessionId": "test-session",
+    "application": {
+      "applicationId": "test-app"
+    },
+    "new": false
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "test-request",
+    "intent": {
+      "name": "AMAZON.HelpIntent"
+    }
+  }
+}
