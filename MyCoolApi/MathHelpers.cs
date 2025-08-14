@@ -14,8 +14,8 @@ public class MathHelpers
     public static int Multiply(int num1, int num2)
         => num1 * num2; public static int[] Fibonacci(int num)
     {
-        if (num <= 0) return Array.Empty<int>();
-        if (num == 1) return new[] { 0 };
+        if (num <= 0) return [];
+        if (num == 1) return [0];
 
         var result = new int[num];
         result[0] = 0;
