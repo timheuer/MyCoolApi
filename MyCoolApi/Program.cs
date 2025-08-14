@@ -1,4 +1,6 @@
 using System.Runtime.InteropServices;
+using System.Text.Json;
+using Alexa.NET.Request;
 using MyCoolApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -91,6 +93,35 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+app.MapPost("/alexa", async (HttpRequest request) =>
+{
+    try
+    {
+        using var reader = new StreamReader(request.Body);
+        var body = await reader.ReadToEndAsync();
+        
+        var skillRequest = JsonSerializer.Deserialize<SkillRequest>(body, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
+
+        if (skillRequest == null)
+        {
+            return Results.BadRequest("Invalid Alexa request");
+        }
+
+        var response = AlexaHelpers.HandleAlexaRequest(skillRequest);
+        return Results.Ok(response);
+    }
+    catch (Exception ex)
+    {
+        // Log error in production
+        return Results.Problem($"Error processing Alexa request: {ex.Message}");
+    }
+})
+.WithName("AlexaSkill")
+.WithOpenApi();
 
 app.Run();
 
