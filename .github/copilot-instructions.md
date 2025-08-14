@@ -221,6 +221,22 @@ $ dotnet test --configuration Release --no-build
 # Includes integration tests that start in-memory web servers
 ```
 
+### Sample HTTP Requests (from playground.http)
+```http
+# String Casing API Examples - Use these for manual validation
+GET http://localhost:5250/casing/hello_world_test/pascal     # → "HelloWorldTest"
+GET http://localhost:5250/casing/hello_world_test/camel      # → "helloWorldTest"  
+GET http://localhost:5250/casing/HelloWorldTest/snake        # → "hello_world_test"
+GET http://localhost:5250/casing/HelloWorldTest/kebab        # → "hello-world-test"
+GET http://localhost:5250/casing/HelloWorldTest/sentence     # → "Hello world test"
+GET http://localhost:5250/casing/hello_world_test/title      # → "Hello World Test"
+GET http://localhost:5250/casing/HelloWorldTest/upper        # → "HELLO_WORLD_TEST"
+GET http://localhost:5250/casing/HelloWorldTest/lower        # → "helloworldtest"
+GET http://localhost:5250/casing/hello/invalid              # → 400 Bad Request
+
+# Use these exact URLs for manual validation after starting the application
+```
+
 ## Troubleshooting
 
 ### Build Issues
@@ -236,5 +252,13 @@ $ dotnet test --configuration Release --no-build
 ### Runtime Issues
 - Default ports: HTTP 5250, HTTPS 7271
 - Swagger available in development at `/swagger`
-- Check launchSettings.json for all available launch profiles
+- Check launchSettings.json for all available launch profiles (http, https, IIS Express, WSL, Docker)
 - Docker support available but requires proper SSL certificate handling
+
+## CRITICAL REMINDER: NEVER CANCEL BUILDS
+- **Build commands may take up to 10+ minutes** in some environments
+- **Test commands may take up to 5+ minutes** with full integration test suite
+- **Always set timeout to 120+ minutes** for dotnet build operations
+- **Always set timeout to 60+ minutes** for dotnet test operations
+- **SSL certificate errors with NuGet are expected** in sandboxed environments - document but do not attempt to fix
+- **Waiting is better than cancelling** - builds that seem hung may still be progressing
