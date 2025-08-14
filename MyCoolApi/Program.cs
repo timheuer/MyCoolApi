@@ -1,5 +1,7 @@
 using System.Runtime.InteropServices;
 using MyCoolApi;
+using Alexa.NET.Request;
+using Alexa.NET.Response;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -91,6 +93,50 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+// Alexa Skill endpoints
+app.MapPost("/alexa/skill", (SkillRequest skillRequest) =>
+{
+    // Basic validation - in production, you'd verify the request signature
+    if (skillRequest?.Request == null)
+    {
+        return Results.BadRequest("Invalid Alexa skill request");
+    }
+
+    return skillRequest.Request switch
+    {
+        LaunchRequest => Results.Ok(AlexaHelpers.CreateSpeechResponse("Welcome to My Cool API! You can ask me about math operations or say hello.")),
+        
+        IntentRequest intentRequest => intentRequest.Intent.Name switch
+        {
+            "HelloWorldIntent" => Results.Ok(AlexaHelpers.CreateSpeechResponse(AlexaHelpers.ProcessIntent("hello"))),
+            "MathHelpIntent" => Results.Ok(AlexaHelpers.CreateSpeechResponse(AlexaHelpers.ProcessIntent("mathhelp"))),
+            "AMAZON.HelpIntent" => Results.Ok(AlexaHelpers.CreateAskResponse(AlexaHelpers.ProcessIntent("help"), "What would you like to know about?")),
+            "AMAZON.StopIntent" or "AMAZON.CancelIntent" => Results.Ok(AlexaHelpers.CreateSpeechResponse(AlexaHelpers.ProcessIntent("goodbye"))),
+            _ => Results.Ok(AlexaHelpers.CreateSpeechResponse("I didn't understand that. Try asking for help."))
+        },
+        
+        SessionEndedRequest => Results.Ok(AlexaHelpers.CreateSpeechResponse("Goodbye!")),
+        
+        _ => Results.Ok(AlexaHelpers.CreateSpeechResponse("I didn't understand that request."))
+    };
+})
+.WithName("AlexaSkill");
+
+app.MapGet("/alexa/intent/{intentName}", (string intentName, string? userInput) =>
+{
+    try
+    {
+        var responseText = AlexaHelpers.ProcessIntent(intentName, userInput);
+        var skillResponse = AlexaHelpers.CreateSpeechResponse(responseText);
+        return Results.Ok(skillResponse);
+    }
+    catch (Exception ex)
+    {
+        return Results.BadRequest($"Error processing intent: {ex.Message}");
+    }
+})
+.WithName("TestAlexaIntent");
 
 app.Run();
 

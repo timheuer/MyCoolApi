@@ -34,3 +34,46 @@ GET http://localhost:5250/casing/hello/invalid
 
 ### Test with special characters and mixed formats
 GET http://localhost:5250/casing/my-cool_API_example/pascal
+
+###
+
+# Alexa Skill API Tests
+# Demo of the new Alexa capabilities
+
+### Test Alexa Hello Intent
+GET http://localhost:5250/alexa/intent/hello
+
+### Test Alexa Hello Intent with User Input
+GET http://localhost:5250/alexa/intent/hello?userInput=Tim
+
+### Test Alexa Math Help Intent
+GET http://localhost:5250/alexa/intent/mathhelp
+
+### Test Alexa Help Intent
+GET http://localhost:5250/alexa/intent/help
+
+### Test Alexa Goodbye Intent
+GET http://localhost:5250/alexa/intent/goodbye
+
+### Test Unknown Intent
+GET http://localhost:5250/alexa/intent/unknown
+
+### Test Alexa Skill Endpoint (POST - simulates actual Alexa skill request)
+POST http://localhost:5250/alexa/skill
+Content-Type: application/json
+
+{
+  "version": "1.0",
+  "session": {
+    "new": true,
+    "sessionId": "amzn1.echo-api.session.test",
+    "application": {
+      "applicationId": "amzn1.ask.skill.test"
+    }
+  },
+  "request": {
+    "type": "LaunchRequest",
+    "requestId": "amzn1.echo-api.request.test",
+    "timestamp": "2023-01-01T00:00:00Z"
+  }
+}
