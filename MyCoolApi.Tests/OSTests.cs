@@ -15,7 +15,6 @@ public class OSTests
         Assert.IsTrue(RuntimeInformation.IsOSPlatform(OSPlatform.Linux));
     }
 
-    [TestMethod]
     [WslCondition]
     public void Running_In_WSL()
     {
