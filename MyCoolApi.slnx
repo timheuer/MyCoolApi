@@ -11,6 +11,7 @@
     <File Path="playground.http" />
     <File Path="testEnvironments.json" />
   </Folder>
+  <Project Path="ConsoleApp1/ConsoleApp1.csproj" />
   
   <Project Path="MyCoolApi.Tests/MyCoolApi.Tests.csproj" />
   <Project Path="MyCoolApi/MyCoolApi.csproj" />
