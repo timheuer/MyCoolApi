@@ -44,7 +44,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
-          include-prerelease: true
+          dontnet-quality: preview
 
       - name: Restore
         run: dotnet restore
