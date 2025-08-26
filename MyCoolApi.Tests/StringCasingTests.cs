@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc.Testing;
-
 namespace MyCoolApi.Tests;
 
 [TestClass]
@@ -71,7 +69,7 @@ public class StringCasingTests
     [TestMethod]
     public void ConvertCase_InvalidCaseType_ThrowsException()
     {
-        var ex = Assert.ThrowsException<ArgumentException>(() => 
+        var ex = Assert.ThrowsException<ArgumentException>(() =>
             StringCasingHelpers.ConvertCase("hello", "invalid"));
         Assert.IsTrue(ex.Message.Contains("Unsupported case type"));
     }
@@ -151,7 +149,7 @@ public class StringCasingTests
     {
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
-        
+
         var response = await client.GetAsync("/casing/hello_world/pascal");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
@@ -163,7 +161,7 @@ public class StringCasingTests
     {
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
-        
+
         var response = await client.GetAsync("/casing/hello_world/camel");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
@@ -175,7 +173,7 @@ public class StringCasingTests
     {
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
-        
+
         var response = await client.GetAsync("/casing/HelloWorld/snake");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
@@ -187,7 +185,7 @@ public class StringCasingTests
     {
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
-        
+
         var response = await client.GetAsync("/casing/hello_world/kebab");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
@@ -199,7 +197,7 @@ public class StringCasingTests
     {
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
-        
+
         var response = await client.GetAsync("/casing/hello_world/sentence");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
@@ -211,7 +209,7 @@ public class StringCasingTests
     {
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
-        
+
         var response = await client.GetAsync("/casing/hello_world/title");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
@@ -223,7 +221,7 @@ public class StringCasingTests
     {
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
-        
+
         var response = await client.GetAsync("/casing/helloWorld/upper");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
@@ -235,7 +233,7 @@ public class StringCasingTests
     {
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
-        
+
         var response = await client.GetAsync("/casing/hello/invalid");
         Assert.AreEqual(System.Net.HttpStatusCode.BadRequest, response.StatusCode);
     }
@@ -245,7 +243,7 @@ public class StringCasingTests
     {
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
-        
+
         var response = await client.GetAsync("/casing/hello-world_test/pascal");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();

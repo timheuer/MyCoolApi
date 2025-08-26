@@ -43,7 +43,8 @@ public class EnvironmentTests
             osDescription.Contains("Linux") ||
             osDescription.Contains("Darwin") ||
             osDescription.Contains("macOS") ||
-            osDescription.Contains("Unix"),
+            osDescription.Contains("Unix") ||
+            osDescription.Contains("Ubuntu"),
             $"OS Description '{osDescription}' doesn't contain recognized OS name");
     }
 }

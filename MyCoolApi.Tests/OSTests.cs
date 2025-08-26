@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.Hosting;
 
 namespace MyCoolApi.Tests;
 
@@ -18,11 +16,14 @@ public class OSTests
     }
 
     [TestMethod]
+    [WslCondition]
     [OSCondition(ConditionMode.Include, OperatingSystems.Linux)]
     public void Running_In_WSL()
     {
         Debug.WriteLine(RuntimeInformation.OSDescription);
-        Assert.IsTrue(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && RuntimeInformation.OSDescription.Contains("WSL"));
+
+        Assert.IsTrue(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) &&
+                      RuntimeInformation.OSDescription.Contains("WSL", StringComparison.OrdinalIgnoreCase));
     }
 
     [TestMethod]

@@ -1,7 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.Hosting;
 
 namespace MyCoolApi.Tests;
 
