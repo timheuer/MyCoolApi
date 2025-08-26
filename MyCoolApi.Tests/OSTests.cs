@@ -17,7 +17,6 @@ public class OSTests
 
     [TestMethod]
     [WslCondition]
-    [OSCondition(ConditionMode.Include, OperatingSystems.Linux)]
     public void Running_In_WSL()
     {
         Debug.WriteLine(RuntimeInformation.OSDescription);

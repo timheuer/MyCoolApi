@@ -17,8 +17,7 @@ public sealed class WslConditionAttribute : TestMethodAttribute
         {
             var tr = new TestResult
             {
-                Outcome = UnitTestOutcome.Inconclusive,
-                TestFailureException = new AssertInconclusiveException("Test only runs in WSL: RuntimeInformation.OSDescription does not contain 'WSL'.")
+                Outcome = UnitTestOutcome.Ignored
             };
 
             return [tr];
