@@ -23,7 +23,8 @@ public sealed class WslConditionAttribute : TestMethodAttribute
         {
             var tr = new TestResult
             {
-                Outcome = UnitTestOutcome.Ignored
+                Outcome = UnitTestOutcome.Ignored,
+                TestContextMessages = "Test is only supported on WSL"
             };
 
             return [tr];
