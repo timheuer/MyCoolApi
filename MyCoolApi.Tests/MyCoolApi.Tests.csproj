@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyCoolApi\MyCoolApi.csproj" />
+    <ProjectReference Include="..\UtilsLib\UtilsLib.csproj" />
   </ItemGroup>
 
 </Project>

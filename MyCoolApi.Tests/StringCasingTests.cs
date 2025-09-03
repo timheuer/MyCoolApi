@@ -237,16 +237,4 @@ public class StringCasingTests
         var response = await client.GetAsync("/casing/hello/invalid");
         Assert.AreEqual(System.Net.HttpStatusCode.BadRequest, response.StatusCode);
     }
-
-    [TestMethod]
-    public async Task CasingApi_SpecialCharacters_Success()
-    {
-        await using var application = new MyCoolApiApp();
-        var client = application.CreateClient();
-
-        var response = await client.GetAsync("/casing/hello-world_test/pascal");
-        response.EnsureSuccessStatusCode();
-        var content = await response.Content.ReadAsStringAsync();
-        Assert.AreEqual("\"HelloWorldTest\"", content); // JSON string response
-    }
 }

@@ -224,4 +224,34 @@ public class MathTests
         var result = await client.GetStringAsync("/divide/7");
         Assert.AreEqual(3, Convert.ToDouble(result)); // Integer division: 7/2 = 3
     }
+
+    [TestMethod]
+    public async Task Divide_Endpoint_Even_Numbers()
+    {
+        await using var application = new MyCoolApiApp();
+        var client = application.CreateClient();
+
+        var result = await client.GetStringAsync("/divide/10");
+        Assert.AreEqual(5.0, Convert.ToDouble(result));
+    }
+
+    [TestMethod]
+    public async Task Divide_Endpoint_Zero()
+    {
+        await using var application = new MyCoolApiApp();
+        var client = application.CreateClient();
+
+        var result = await client.GetStringAsync("/divide/0");
+        Assert.AreEqual(0.0, Convert.ToDouble(result));
+    }
+
+    [TestMethod]
+    public async Task Divide_Endpoint_Negative_Numbers()
+    {
+        await using var application = new MyCoolApiApp();
+        var client = application.CreateClient();
+
+        var result = await client.GetStringAsync("/divide/-8");
+        Assert.AreEqual(-4.0, Convert.ToDouble(result));
+    }
 }
