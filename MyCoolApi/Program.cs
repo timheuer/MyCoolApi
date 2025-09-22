@@ -1,102 +1,102 @@
 using System.Runtime.InteropServices;
 using MyCoolApi;
 
-var anwendungsErsteller = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
-anwendungsErsteller.Services.AddEndpointsApiExplorer();
-anwendungsErsteller.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-var anwendung = anwendungsErsteller.Build();
+var app = builder.Build();
 
-// HTTP-Request-Pipeline konfigurieren
-if (anwendung.Environment.IsDevelopment())
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    anwendung.UseSwagger();
-    anwendung.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
-anwendung.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
-var zusammenfassungen = new[]
+var summaries = new[]
 {
-    "Frierend", "Kühl", "Kalt", "Angenehm", "Mild", "Warm", "Balmy", "Heiß", "Schwül", "Brennend"
+    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-anwendung.MapGet("/add/{zahl1},{zahl2}", (int zahl1, int zahl2) =>
+app.MapGet("/add/{num1},{num2}", (int num1, int num2) =>
 {
 
-    var ergebnis = MathematikHelfer.Addieren(zahl1, zahl2);
-    return ergebnis;
+    var result = MathHelpers.Add(num1, num2);
+    return result;
 });
 
-anwendung.MapGet("/fibonacci/{zahl}", (int zahl) =>
+app.MapGet("/fibonacci/{num}", (int num) =>
 {
-    return MathematikHelfer.Fibonacci(zahl);
+    return MathHelpers.Fibonacci(num);
 });
 
-anwendung.MapGet("/multiply/{zahl1},{zahl2}", (int zahl1, int zahl2) =>
+app.MapGet("/multiply/{num1},{num2}", (int num1, int num2) =>
 {
-    return MathematikHelfer.Multiplizieren(zahl1, zahl2);
+    return MathHelpers.Multiply(num1, num2);
 });
 
-anwendung.MapGet("/doubleit/{zahl1}", (int zahl1) =>
+app.MapGet("/doubleit/{num1}", (int num1) =>
 {
-    return MathematikHelfer.VerdoppelnVon(zahl1);
+    return MathHelpers.MultiplyByTwo(num1);
 });
 
-anwendung.MapGet("/hello/{name}", (string name) =>
+app.MapGet("/hello/{name}", (string name) =>
 {
-    return HalloErsteller.SageHallo(name);
+    return HelloBuilders.SayHello(name);
 });
 
-anwendung.MapGet("/bye/{name}", (string name) =>
+app.MapGet("/bye/{name}", (string name) =>
 {
-    return HalloErsteller.SageTschuess(name);
+    return HelloBuilders.SayGoodbye(name);
 });
 
-anwendung.MapGet("/env", () =>
+app.MapGet("/env", () =>
 {
 
     return RuntimeInformation.OSDescription;
 });
 
-anwendung.MapGet("/divide/{zahl1}", (int zahl1) =>
+app.MapGet("/divide/{num1}", (int num1) =>
 {
-    return MathematikHelfer.HalbierenVon(zahl1);
+    return MathHelpers.DivideInHalf(num1);
 });
 
-anwendung.MapGet("/casing/{eingabe}/{formatTyp}", (string eingabe, string formatTyp) =>
+app.MapGet("/casing/{input}/{caseType}", (string input, string caseType) =>
 {
     try
     {
-        var ergebnis = ZeichenkettenHelfer.KonvertiereGroessKleinschreibung(eingabe, formatTyp);
-        return Results.Ok(ergebnis);
+        var result = StringCasingHelpers.ConvertCase(input, caseType);
+        return Results.Ok(result);
     }
-    catch (ArgumentException ausnahme)
+    catch (ArgumentException ex)
     {
-        return Results.BadRequest(ausnahme.Message);
+        return Results.BadRequest(ex.Message);
     }
 });
 
-anwendung.MapGet("/weatherforecast", () =>
+app.MapGet("/weatherforecast", () =>
 {
-    var vorhersage = Enumerable.Range(1, 5).Select(index =>
-        new WetterVorhersage
+    var forecast = Enumerable.Range(1, 5).Select(index =>
+        new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
             Random.Shared.Next(-20, 55),
-            zusammenfassungen[Random.Shared.Next(zusammenfassungen.Length)]
+            summaries[Random.Shared.Next(summaries.Length)]
         ))
         .ToArray();
-    return vorhersage;
+    return forecast;
 })
 .WithName("GetWeatherForecast");
 
-anwendung.Run();
+app.Run();
 
-public record WetterVorhersage(DateOnly Datum, int TemperaturC, string? Zusammenfassung)
+public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
-    public int TemperaturF => 32 + (int)(TemperaturC / 0.5556);
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
 
 public partial class Program { }

@@ -6,141 +6,141 @@ public class StringCasingTests
     [TestMethod]
     public void ConvertCase_ToPascalCase_Success()
     {
-        Assert.AreEqual("HelloWorld", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello_world", "pascal"));
-        Assert.AreEqual("HelloWorld", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello-world", "pascalcase"));
-        Assert.AreEqual("HelloWorld", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello world", "pascal"));
+        Assert.AreEqual("HelloWorld", StringCasingHelpers.ConvertCase("hello_world", "pascal"));
+        Assert.AreEqual("HelloWorld", StringCasingHelpers.ConvertCase("hello-world", "pascalcase"));
+        Assert.AreEqual("HelloWorld", StringCasingHelpers.ConvertCase("hello world", "pascal"));
     }
 
     [TestMethod]
     public void ConvertCase_ToCamelCase_Success()
     {
-        Assert.AreEqual("helloWorld", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello_world", "camel"));
-        Assert.AreEqual("helloWorld", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello-world", "camelcase"));
-        Assert.AreEqual("helloWorld", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello world", "camel"));
+        Assert.AreEqual("helloWorld", StringCasingHelpers.ConvertCase("hello_world", "camel"));
+        Assert.AreEqual("helloWorld", StringCasingHelpers.ConvertCase("hello-world", "camelcase"));
+        Assert.AreEqual("helloWorld", StringCasingHelpers.ConvertCase("hello world", "camel"));
     }
 
     [TestMethod]
     public void ConvertCase_ToSnakeCase_Success()
     {
-        Assert.AreEqual("hello_world", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("HelloWorld", "snake"));
-        Assert.AreEqual("hello_world", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("helloWorld", "snake_case"));
-        Assert.AreEqual("hello_world", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello-world", "snake"));
+        Assert.AreEqual("hello_world", StringCasingHelpers.ConvertCase("HelloWorld", "snake"));
+        Assert.AreEqual("hello_world", StringCasingHelpers.ConvertCase("helloWorld", "snake_case"));
+        Assert.AreEqual("hello_world", StringCasingHelpers.ConvertCase("hello-world", "snake"));
     }
 
     [TestMethod]
     public void ConvertCase_ToKebabCase_Success()
     {
-        Assert.AreEqual("hello-world", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello_world", "kebab"));
-        Assert.AreEqual("hello-world", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("HelloWorld", "kebab-case"));
-        Assert.AreEqual("hello-world", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello world", "kebab"));
+        Assert.AreEqual("hello-world", StringCasingHelpers.ConvertCase("hello_world", "kebab"));
+        Assert.AreEqual("hello-world", StringCasingHelpers.ConvertCase("HelloWorld", "kebab-case"));
+        Assert.AreEqual("hello-world", StringCasingHelpers.ConvertCase("hello world", "kebab"));
     }
 
     [TestMethod]
     public void ConvertCase_ToSentenceCase_Success()
     {
-        Assert.AreEqual("hello world", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello_world", "sentence"));
-        Assert.AreEqual("Hello world", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("HelloWorld", "sentencecase"));
-        Assert.AreEqual("hello world", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello-world", "sentence"));
+        Assert.AreEqual("hello world", StringCasingHelpers.ConvertCase("hello_world", "sentence"));
+        Assert.AreEqual("Hello world", StringCasingHelpers.ConvertCase("HelloWorld", "sentencecase"));
+        Assert.AreEqual("hello world", StringCasingHelpers.ConvertCase("hello-world", "sentence"));
     }
 
     [TestMethod]
     public void ConvertCase_ToTitleCase_Success()
     {
-        Assert.AreEqual("Hello World", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello_world", "title"));
-        Assert.AreEqual("Hello World", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("helloWorld", "titlecase"));
-        Assert.AreEqual("Hello World", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello-world", "title"));
+        Assert.AreEqual("Hello World", StringCasingHelpers.ConvertCase("hello_world", "title"));
+        Assert.AreEqual("Hello World", StringCasingHelpers.ConvertCase("helloWorld", "titlecase"));
+        Assert.AreEqual("Hello World", StringCasingHelpers.ConvertCase("hello-world", "title"));
     }
 
     [TestMethod]
     public void ConvertCase_ToUpperCase_Success()
     {
-        Assert.AreEqual("HELLO_WORLD", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("helloWorld", "upper"));
-        Assert.AreEqual("HELLO_WORLD", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello-world", "uppercase"));
-        Assert.AreEqual("HELLO_WORLD", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello world", "upper"));
+        Assert.AreEqual("HELLO_WORLD", StringCasingHelpers.ConvertCase("helloWorld", "upper"));
+        Assert.AreEqual("HELLO_WORLD", StringCasingHelpers.ConvertCase("hello-world", "uppercase"));
+        Assert.AreEqual("HELLO_WORLD", StringCasingHelpers.ConvertCase("hello world", "upper"));
     }
 
     [TestMethod]
     public void ConvertCase_ToLowerCase_Success()
     {
-        Assert.AreEqual("helloworld", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("HelloWorld", "lower"));
-        Assert.AreEqual("hello-world", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("Hello-World", "lowercase"));
+        Assert.AreEqual("helloworld", StringCasingHelpers.ConvertCase("HelloWorld", "lower"));
+        Assert.AreEqual("hello-world", StringCasingHelpers.ConvertCase("Hello-World", "lowercase"));
     }
 
     [TestMethod]
     public void ConvertCase_InvalidCaseType_ThrowsException()
     {
         var ex = Assert.ThrowsException<ArgumentException>(() =>
-            ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("hello", "invalid"));
-        Assert.IsTrue(ex.Message.Contains("Nicht unterstützter Format-Typ"));
+            StringCasingHelpers.ConvertCase("hello", "invalid"));
+        Assert.IsTrue(ex.Message.Contains("Unsupported case type"));
     }
 
     [TestMethod]
     public void ConvertCase_EmptyString_ReturnsEmpty()
     {
-        Assert.AreEqual("", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("", "pascal"));
-        Assert.AreEqual("", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("", "camel"));
+        Assert.AreEqual("", StringCasingHelpers.ConvertCase("", "pascal"));
+        Assert.AreEqual("", StringCasingHelpers.ConvertCase("", "camel"));
     }
 
     [TestMethod]
     public void ConvertCase_NullString_ReturnsNull()
     {
-        Assert.IsNull(ZeichenkettenHelfer.KonvertiereGroessKleinschreibung(null!, "pascal"));
+        Assert.IsNull(StringCasingHelpers.ConvertCase(null!, "pascal"));
     }
 
     [TestMethod]
     public void ConvertCase_WhitespaceOnly_ReturnsWhitespace()
     {
-        Assert.AreEqual("   ", ZeichenkettenHelfer.KonvertiereGroessKleinschreibung("   ", "pascal"));
+        Assert.AreEqual("   ", StringCasingHelpers.ConvertCase("   ", "pascal"));
     }
 
     // Individual method tests
     [TestMethod]
     public void ToPascalCase_Success()
     {
-        Assert.AreEqual("HelloWorld", ZeichenkettenHelfer.ZuPascalFormat("hello_world"));
-        Assert.AreEqual("ApiResponse", ZeichenkettenHelfer.ZuPascalFormat("api_response"));
+        Assert.AreEqual("HelloWorld", StringCasingHelpers.ToPascalCase("hello_world"));
+        Assert.AreEqual("ApiResponse", StringCasingHelpers.ToPascalCase("api_response"));
     }
 
     [TestMethod]
     public void ToCamelCase_Success()
     {
-        Assert.AreEqual("helloWorld", ZeichenkettenHelfer.ZuCamelFormat("hello_world"));
-        Assert.AreEqual("apiResponse", ZeichenkettenHelfer.ZuCamelFormat("api_response"));
+        Assert.AreEqual("helloWorld", StringCasingHelpers.ToCamelCase("hello_world"));
+        Assert.AreEqual("apiResponse", StringCasingHelpers.ToCamelCase("api_response"));
     }
 
     [TestMethod]
     public void ToSnakeCase_Success()
     {
-        Assert.AreEqual("hello_world", ZeichenkettenHelfer.ZuSchlangen_Format("HelloWorld"));
-        Assert.AreEqual("api_response", ZeichenkettenHelfer.ZuSchlangen_Format("ApiResponse"));
+        Assert.AreEqual("hello_world", StringCasingHelpers.ToSnakeCase("HelloWorld"));
+        Assert.AreEqual("api_response", StringCasingHelpers.ToSnakeCase("ApiResponse"));
     }
 
     [TestMethod]
     public void ToKebabCase_Success()
     {
-        Assert.AreEqual("hello-world", ZeichenkettenHelfer.ZuKebabFormat("hello_world"));
-        Assert.AreEqual("hello-world", ZeichenkettenHelfer.ZuKebabFormat("HelloWorld"));
+        Assert.AreEqual("hello-world", StringCasingHelpers.ToKebabCase("hello_world"));
+        Assert.AreEqual("hello-world", StringCasingHelpers.ToKebabCase("HelloWorld"));
     }
 
     [TestMethod]
     public void ToSentenceCase_Success()
     {
-        Assert.AreEqual("hello world", ZeichenkettenHelfer.ZuSatzFormat("hello_world"));
-        Assert.AreEqual("Api response", ZeichenkettenHelfer.ZuSatzFormat("ApiResponse"));
+        Assert.AreEqual("hello world", StringCasingHelpers.ToSentenceCase("hello_world"));
+        Assert.AreEqual("Api response", StringCasingHelpers.ToSentenceCase("ApiResponse"));
     }
 
     [TestMethod]
     public void ToTitleCase_Success()
     {
-        Assert.AreEqual("Hello World", ZeichenkettenHelfer.ZuTitelFormat("hello_world"));
-        Assert.AreEqual("Api Response", ZeichenkettenHelfer.ZuTitelFormat("ApiResponse"));
+        Assert.AreEqual("Hello World", StringCasingHelpers.ToTitleCase("hello_world"));
+        Assert.AreEqual("Api Response", StringCasingHelpers.ToTitleCase("ApiResponse"));
     }
 
     [TestMethod]
     public void ToUpperCase_Success()
     {
-        Assert.AreEqual("HELLO_WORLD", ZeichenkettenHelfer.ZuGrossschreibung("HelloWorld"));
-        Assert.AreEqual("API_RESPONSE", ZeichenkettenHelfer.ZuGrossschreibung("ApiResponse"));
+        Assert.AreEqual("HELLO_WORLD", StringCasingHelpers.ToUpperCase("HelloWorld"));
+        Assert.AreEqual("API_RESPONSE", StringCasingHelpers.ToUpperCase("ApiResponse"));
     }
 
     // Integration tests for API endpoints

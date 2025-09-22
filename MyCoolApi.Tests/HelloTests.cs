@@ -14,7 +14,7 @@ public class HelloTests
 
         var client = application.CreateClient();
         var hello = await client.GetStringAsync("/hello/tim");
-        Assert.AreEqual("Hallo Tim", hello);
+        Assert.AreEqual("Hello Tim", hello);
     }
 
     [TestMethod]
@@ -25,39 +25,39 @@ public class HelloTests
         var client = application.CreateClient();
         var hello = await client.GetStringAsync("/bye/felicia");
         Debug.WriteLine(hello);
-        Assert.AreEqual("Tschüss Felicia!", hello);
+        Assert.AreEqual("Bye Felicia!", hello);
     }
 
     // Unit tests for HelloBuilders methods
     [TestMethod]
     public void SayHello_Unit_Test()
     {
-        Assert.AreEqual("Hallo Tim", HalloErsteller.SageHallo("tim"));
-        Assert.AreEqual("Hallo John", HalloErsteller.SageHallo("john"));
-        Assert.AreEqual("Hallo MARY", HalloErsteller.SageHallo("MARY"));
+        Assert.AreEqual("Hello Tim", HelloBuilders.SayHello("tim"));
+        Assert.AreEqual("Hello John", HelloBuilders.SayHello("john"));
+        Assert.AreEqual("Hello MARY", HelloBuilders.SayHello("MARY"));
     }
 
     [TestMethod]
     public void SayGoodbye_Unit_Test()
     {
-        Assert.AreEqual("Tschüss Tim!", HalloErsteller.SageTschuess("tim"));
-        Assert.AreEqual("Tschüss John!", HalloErsteller.SageTschuess("john"));
-        Assert.AreEqual("Tschüss MARY!", HalloErsteller.SageTschuess("MARY"));
+        Assert.AreEqual("Bye Tim!", HelloBuilders.SayGoodbye("tim"));
+        Assert.AreEqual("Bye John!", HelloBuilders.SayGoodbye("john"));
+        Assert.AreEqual("Bye MARY!", HelloBuilders.SayGoodbye("MARY"));
     }
     [TestMethod]
     public void SayHello_With_Mixed_Case()
     {
-        Assert.AreEqual("Hallo Alice", HalloErsteller.SageHallo("aLiCe"));
-        Assert.AreEqual("Hallo BOB", HalloErsteller.SageHallo("BOB")); // ToTitleCase keeps all-caps as-is
-        Assert.AreEqual("Hallo Charlie", HalloErsteller.SageHallo("charlie"));
+        Assert.AreEqual("Hello Alice", HelloBuilders.SayHello("aLiCe"));
+        Assert.AreEqual("Hello BOB", HelloBuilders.SayHello("BOB")); // ToTitleCase keeps all-caps as-is
+        Assert.AreEqual("Hello Charlie", HelloBuilders.SayHello("charlie"));
     }
 
     [TestMethod]
     public void SayGoodbye_With_Mixed_Case()
     {
-        Assert.AreEqual("Tschüss Alice!", HalloErsteller.SageTschuess("aLiCe"));
-        Assert.AreEqual("Tschüss BOB!", HalloErsteller.SageTschuess("BOB")); // ToTitleCase keeps all-caps as-is
-        Assert.AreEqual("Tschüss Charlie!", HalloErsteller.SageTschuess("charlie"));
+        Assert.AreEqual("Bye Alice!", HelloBuilders.SayGoodbye("aLiCe"));
+        Assert.AreEqual("Bye BOB!", HelloBuilders.SayGoodbye("BOB")); // ToTitleCase keeps all-caps as-is
+        Assert.AreEqual("Bye Charlie!", HelloBuilders.SayGoodbye("charlie"));
     }
 
     [TestMethod]
@@ -67,7 +67,7 @@ public class HelloTests
         var client = application.CreateClient();
 
         var result = await client.GetStringAsync("/hello/jane-doe");
-        Assert.AreEqual("Hallo Jane-Doe", result);
+        Assert.AreEqual("Hello Jane-Doe", result);
     }
 
     [TestMethod]
@@ -77,20 +77,20 @@ public class HelloTests
         var client = application.CreateClient();
 
         var result = await client.GetStringAsync("/bye/jane-doe");
-        Assert.AreEqual("Tschüss Jane-Doe!", result);
+        Assert.AreEqual("Bye Jane-Doe!", result);
     }
 
     [TestMethod]
     public void SayHello_With_Single_Character()
     {
-        Assert.AreEqual("Hallo A", HalloErsteller.SageHallo("a"));
-        Assert.AreEqual("Hallo Z", HalloErsteller.SageHallo("z"));
+        Assert.AreEqual("Hello A", HelloBuilders.SayHello("a"));
+        Assert.AreEqual("Hello Z", HelloBuilders.SayHello("z"));
     }
 
     [TestMethod]
     public void SayGoodbye_With_Single_Character()
     {
-        Assert.AreEqual("Tschüss A!", HalloErsteller.SageTschuess("a"));
-        Assert.AreEqual("Tschüss Z!", HalloErsteller.SageTschuess("z"));
+        Assert.AreEqual("Bye A!", HelloBuilders.SayGoodbye("a"));
+        Assert.AreEqual("Bye Z!", HelloBuilders.SayGoodbye("z"));
     }
 }
