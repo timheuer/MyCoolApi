@@ -2,50 +2,50 @@ using Humanizer;
 
 namespace MyCoolApi;
 
-public class StringCasingHelpers
+public class ZeichenkettenHelfer
 {
-    public static string ConvertCase(string input, string caseType)
+    public static string KonvertiereGroessKleinschreibung(string eingabe, string formatTyp)
     {
-        if (string.IsNullOrWhiteSpace(input))
-            return input;
+        if (string.IsNullOrWhiteSpace(eingabe))
+            return eingabe;
 
-        return caseType.ToLowerInvariant() switch
+        return formatTyp.ToLowerInvariant() switch
         {
-            "pascal" or "pascalcase" => ToPascalCase(input),
-            "camel" or "camelcase" => ToCamelCase(input),
-            "snake" or "snake_case" => input.Underscore(),
-            "kebab" or "kebab-case" => ToKebabCase(input),
-            "sentence" or "sentencecase" => input.Humanize(),
-            "title" or "titlecase" => input.Titleize(),
-            "upper" or "uppercase" => input.Underscore().ToUpperInvariant(),
-            "lower" or "lowercase" => input.ToLowerInvariant(),
-            _ => throw new ArgumentException($"Unsupported case type: {caseType}. Supported types: pascal, camel, snake, kebab, sentence, title, upper, lower")
+            "pascal" or "pascalcase" => ZuPascalFormat(eingabe),
+            "camel" or "camelcase" => ZuCamelFormat(eingabe),
+            "snake" or "snake_case" => eingabe.Underscore(),
+            "kebab" or "kebab-case" => ZuKebabFormat(eingabe),
+            "sentence" or "sentencecase" => eingabe.Humanize(),
+            "title" or "titlecase" => eingabe.Titleize(),
+            "upper" or "uppercase" => eingabe.Underscore().ToUpperInvariant(),
+            "lower" or "lowercase" => eingabe.ToLowerInvariant(),
+            _ => throw new ArgumentException($"Nicht unterstützter Format-Typ: {formatTyp}. Unterstützte Typen: pascal, camel, snake, kebab, sentence, title, upper, lower")
         };
     }
 
-    public static string ToPascalCase(string input)
+    public static string ZuPascalFormat(string eingabe)
     {
-        // First normalize hyphens to underscores, then use Pascalize
-        var normalized = input.Replace("-", "_");
-        return normalized.Pascalize();
+        // Erst Bindestriche zu Unterstrichen normalisieren, dann Pascalize verwenden
+        var normalisiert = eingabe.Replace("-", "_");
+        return normalisiert.Pascalize();
     }
 
-    public static string ToCamelCase(string input)
+    public static string ZuCamelFormat(string eingabe)
     {
-        // First normalize hyphens to underscores, then use Camelize
-        var normalized = input.Replace("-", "_");
-        return normalized.Camelize();
+        // Erst Bindestriche zu Unterstrichen normalisieren, dann Camelize verwenden
+        var normalisiert = eingabe.Replace("-", "_");
+        return normalisiert.Camelize();
     }
 
-    public static string ToSnakeCase(string input) => input.Underscore();
+    public static string ZuSchlangen_Format(string eingabe) => eingabe.Underscore();
 
-    public static string ToKebabCase(string input)
+    public static string ZuKebabFormat(string eingabe)
     {
-        // Convert to snake_case first, then replace underscores with hyphens
-        return input.Underscore().Replace("_", "-");
+        // Erst zu snake_case konvertieren, dann Unterstriche durch Bindestriche ersetzen
+        return eingabe.Underscore().Replace("_", "-");
     }
 
-    public static string ToSentenceCase(string input) => input.Humanize();
-    public static string ToTitleCase(string input) => input.Titleize();
-    public static string ToUpperCase(string input) => input.Underscore().ToUpperInvariant();
+    public static string ZuSatzFormat(string eingabe) => eingabe.Humanize();
+    public static string ZuTitelFormat(string eingabe) => eingabe.Titleize();
+    public static string ZuGrossschreibung(string eingabe) => eingabe.Underscore().ToUpperInvariant();
 }

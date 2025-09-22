@@ -2,47 +2,47 @@
 
 namespace MyCoolApi;
 
-public class MathHelpers
+public class MathematikHelfer
 {
 
-    public static int Add(int num1, int num2)
-        => num1 + num2;
+    public static int Addieren(int zahl1, int zahl2)
+        => zahl1 + zahl2;
 
-    public static int Subtract(int num1, int num2)
-        => num1 - num2;
+    public static int Subtrahieren(int zahl1, int zahl2)
+        => zahl1 - zahl2;
 
-    public static int Multiply(int num1, int num2)
-        => num1 * num2; public static int[] Fibonacci(int num)
+    public static int Multiplizieren(int zahl1, int zahl2)
+        => zahl1 * zahl2; public static int[] Fibonacci(int zahl)
     {
-        if (num <= 0) return [];
-        if (num == 1) return [0];
+        if (zahl <= 0) return [];
+        if (zahl == 1) return [0];
 
-        var result = new int[num];
-        result[0] = 0;
-        result[1] = 1;
+        var ergebnis = new int[zahl];
+        ergebnis[0] = 0;
+        ergebnis[1] = 1;
 
-        for (int i = 2; i < num; i++)
+        for (int i = 2; i < zahl; i++)
         {
-            result[i] = result[i - 1] + result[i - 2];
+            ergebnis[i] = ergebnis[i - 1] + ergebnis[i - 2];
         }
 
-        return result;
+        return ergebnis;
     }
 
-    public static int Factorial(int num)
-        => num switch
+    public static int Fakultaet(int zahl)
+        => zahl switch
         {
             0 => 1,
-            _ => num * Factorial(num - 1)
+            _ => zahl * Fakultaet(zahl - 1)
         };
 
-    public static double DivideInHalf(int number)
+    public static double HalbierenVon(int zahl)
     {
-        return number / 2;
+        return zahl / 2;
     }
 
-    public static double MultiplyByTwo(int number)
+    public static double VerdoppelnVon(int zahl)
     {
-        return number * 2;
+        return zahl * 2;
     }
 }
