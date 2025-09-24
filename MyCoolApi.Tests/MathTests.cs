@@ -10,7 +10,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
 
         var client = application.CreateClient();
-        var sum = await client.GetStringAsync("/add/1,1");
+        var sum = await client.GetStringAsync("/addieren/1,1");
         Assert.AreEqual(2, Convert.ToInt32(sum));
     }
 
@@ -20,7 +20,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
 
         var client = application.CreateClient();
-        var sum = await client.GetStringAsync("/add/1,2");
+        var sum = await client.GetStringAsync("/addieren/1,2");
         Assert.AreEqual(3, Convert.ToInt32(sum));
     }
 
@@ -30,7 +30,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
 
         var client = application.CreateClient();
-        var sum = await client.GetStringAsync("/add/1,3");
+        var sum = await client.GetStringAsync("/addieren/1,3");
         Assert.AreEqual(4, Convert.ToInt32(sum));
     }
 
@@ -40,7 +40,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
 
         var client = application.CreateClient();
-        var sum = await client.GetStringAsync("/add/1,4");
+        var sum = await client.GetStringAsync("/addieren/1,4");
         Assert.AreEqual(5, Convert.ToInt32(sum));
     }
 
@@ -50,7 +50,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
 
         var client = application.CreateClient();
-        var product = await client.GetStringAsync("/multiply/3,4");
+        var product = await client.GetStringAsync("/multiplizieren/3,4");
         Assert.AreEqual(12, Convert.ToInt32(product));
     }
 
@@ -60,7 +60,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
 
         var client = application.CreateClient();
-        var product = await client.GetStringAsync("/multiply/4,5");
+        var product = await client.GetStringAsync("/multiplizieren/4,5");
         Assert.AreEqual(20, Convert.ToInt32(product));
     }
 
@@ -70,7 +70,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
 
         var client = application.CreateClient();
-        var product = await client.GetStringAsync("/divide/12");
+        var product = await client.GetStringAsync("/halbieren/12");
         Assert.AreEqual(6, Convert.ToDouble(product));
     }
 
@@ -79,7 +79,7 @@ public class MathTests
     {
         // First 5 Fibonacci numbers should be [0, 1, 1, 2, 3]
         var expected = new[] { 0, 1, 1, 2, 3 };
-        var result = MathHelpers.Fibonacci(5);
+        var result = MathHelfers.Fibonacci(5);
 
         CollectionAssert.AreEqual(expected, result);
     }
@@ -87,67 +87,67 @@ public class MathTests
     [TestMethod]
     public void Add_Direct_Test()
     {
-        Assert.AreEqual(5, MathHelpers.Add(2, 3));
-        Assert.AreEqual(0, MathHelpers.Add(0, 0));
-        Assert.AreEqual(-1, MathHelpers.Add(-2, 1));
+        Assert.AreEqual(5, MathHelfers.Addieren(2, 3));
+        Assert.AreEqual(0, MathHelfers.Addieren(0, 0));
+        Assert.AreEqual(-1, MathHelfers.Addieren(-2, 1));
     }
 
     [TestMethod]
     public void Subtract_Direct_Test()
     {
-        Assert.AreEqual(2, MathHelpers.Subtract(5, 3));
-        Assert.AreEqual(0, MathHelpers.Subtract(0, 0));
-        Assert.AreEqual(-3, MathHelpers.Subtract(-2, 1));
+        Assert.AreEqual(2, MathHelfers.Subtrahieren(5, 3));
+        Assert.AreEqual(0, MathHelfers.Subtrahieren(0, 0));
+        Assert.AreEqual(-3, MathHelfers.Subtrahieren(-2, 1));
     }
 
     [TestMethod]
     public void Multiply_Direct_Test()
     {
-        Assert.AreEqual(15, MathHelpers.Multiply(3, 5));
-        Assert.AreEqual(0, MathHelpers.Multiply(0, 5));
-        Assert.AreEqual(-6, MathHelpers.Multiply(-2, 3));
+        Assert.AreEqual(15, MathHelfers.Multiplizieren(3, 5));
+        Assert.AreEqual(0, MathHelfers.Multiplizieren(0, 5));
+        Assert.AreEqual(-6, MathHelfers.Multiplizieren(-2, 3));
     }
 
     [TestMethod]
     public void Fibonacci_Edge_Cases()
     {
         // Test empty sequence
-        CollectionAssert.AreEqual(new int[0], MathHelpers.Fibonacci(0));
+        CollectionAssert.AreEqual(new int[0], MathHelfers.Fibonacci(0));
 
         // Test single element
-        CollectionAssert.AreEqual(new[] { 0 }, MathHelpers.Fibonacci(1));
+        CollectionAssert.AreEqual(new[] { 0 }, MathHelfers.Fibonacci(1));
 
         // Test two elements
-        CollectionAssert.AreEqual(new[] { 0, 1 }, MathHelpers.Fibonacci(2));
+        CollectionAssert.AreEqual(new[] { 0, 1 }, MathHelfers.Fibonacci(2));
     }
 
     [TestMethod]
     public void Factorial_Tests()
     {
-        Assert.AreEqual(1, MathHelpers.Factorial(0)); // 0! = 1
-        Assert.AreEqual(1, MathHelpers.Factorial(1)); // 1! = 1
-        Assert.AreEqual(2, MathHelpers.Factorial(2)); // 2! = 2
-        Assert.AreEqual(6, MathHelpers.Factorial(3)); // 3! = 6
-        Assert.AreEqual(24, MathHelpers.Factorial(4)); // 4! = 24
-        Assert.AreEqual(120, MathHelpers.Factorial(5)); // 5! = 120
+        Assert.AreEqual(1, MathHelfers.Fakultaet(0)); // 0! = 1
+        Assert.AreEqual(1, MathHelfers.Fakultaet(1)); // 1! = 1
+        Assert.AreEqual(2, MathHelfers.Fakultaet(2)); // 2! = 2
+        Assert.AreEqual(6, MathHelfers.Fakultaet(3)); // 3! = 6
+        Assert.AreEqual(24, MathHelfers.Fakultaet(4)); // 4! = 24
+        Assert.AreEqual(120, MathHelfers.Fakultaet(5)); // 5! = 120
     }
 
     [TestMethod]
     public void DivideInHalf_Tests()
     {
-        Assert.AreEqual(5.0, MathHelpers.DivideInHalf(10));
-        Assert.AreEqual(0.0, MathHelpers.DivideInHalf(0));
-        Assert.AreEqual(-5.0, MathHelpers.DivideInHalf(-10));
-        Assert.AreEqual(2, MathHelpers.DivideInHalf(5)); // Test odd number division
+        Assert.AreEqual(5.0, MathHelfers.Halbieren(10));
+        Assert.AreEqual(0.0, MathHelfers.Halbieren(0));
+        Assert.AreEqual(-5.0, MathHelfers.Halbieren(-10));
+        Assert.AreEqual(2, MathHelfers.Halbieren(5)); // Test odd number division
     }
 
     [TestMethod]
     public void MultiplyByTwo_Tests()
     {
-        Assert.AreEqual(20.0, MathHelpers.MultiplyByTwo(10));
-        Assert.AreEqual(0.0, MathHelpers.MultiplyByTwo(0));
-        Assert.AreEqual(-20.0, MathHelpers.MultiplyByTwo(-10));
-        Assert.AreEqual(2.0, MathHelpers.MultiplyByTwo(1));
+        Assert.AreEqual(20.0, MathHelfers.Verdoppeln(10));
+        Assert.AreEqual(0.0, MathHelfers.Verdoppeln(0));
+        Assert.AreEqual(-20.0, MathHelfers.Verdoppeln(-10));
+        Assert.AreEqual(2.0, MathHelfers.Verdoppeln(1));
     }
 
     [TestMethod]
@@ -186,13 +186,13 @@ public class MathTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var result1 = await client.GetStringAsync("/doubleit/5");
+        var result1 = await client.GetStringAsync("/verdoppeln/5");
         Assert.AreEqual(10.0, Convert.ToDouble(result1));
 
-        var result2 = await client.GetStringAsync("/doubleit/0");
+        var result2 = await client.GetStringAsync("/verdoppeln/0");
         Assert.AreEqual(0.0, Convert.ToDouble(result2));
 
-        var result3 = await client.GetStringAsync("/doubleit/-3");
+        var result3 = await client.GetStringAsync("/verdoppeln/-3");
         Assert.AreEqual(-6.0, Convert.ToDouble(result3));
     }
 
@@ -202,7 +202,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var result = await client.GetStringAsync("/add/-5,-3");
+        var result = await client.GetStringAsync("/addieren/-5,-3");
         Assert.AreEqual(-8, Convert.ToInt32(result));
     }
 
@@ -212,7 +212,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var result = await client.GetStringAsync("/multiply/0,999");
+        var result = await client.GetStringAsync("/multiplizieren/0,999");
         Assert.AreEqual(0, Convert.ToInt32(result));
     }
     [TestMethod]
@@ -221,7 +221,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var result = await client.GetStringAsync("/divide/7");
+        var result = await client.GetStringAsync("/halbieren/7");
         Assert.AreEqual(3, Convert.ToDouble(result)); // Integer division: 7/2 = 3
     }
 
@@ -231,7 +231,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var result = await client.GetStringAsync("/divide/10");
+        var result = await client.GetStringAsync("/halbieren/10");
         Assert.AreEqual(5.0, Convert.ToDouble(result));
     }
 
@@ -241,7 +241,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var result = await client.GetStringAsync("/divide/0");
+        var result = await client.GetStringAsync("/halbieren/0");
         Assert.AreEqual(0.0, Convert.ToDouble(result));
     }
 
@@ -251,7 +251,7 @@ public class MathTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var result = await client.GetStringAsync("/divide/-8");
+        var result = await client.GetStringAsync("/halbieren/-8");
         Assert.AreEqual(-4.0, Convert.ToDouble(result));
     }
 }

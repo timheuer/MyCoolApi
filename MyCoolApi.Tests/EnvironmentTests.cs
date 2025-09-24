@@ -11,7 +11,7 @@ public class EnvironmentTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var osDescription = await client.GetStringAsync("/env");
+        var osDescription = await client.GetStringAsync("/umgebung");
 
         Assert.IsFalse(string.IsNullOrWhiteSpace(osDescription));
         Assert.IsTrue(osDescription.Length > 0);
@@ -23,7 +23,7 @@ public class EnvironmentTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var endpointResult = await client.GetStringAsync("/env");
+        var endpointResult = await client.GetStringAsync("/umgebung");
         var runtimeResult = RuntimeInformation.OSDescription;
 
         Assert.AreEqual(runtimeResult, endpointResult);
@@ -35,7 +35,7 @@ public class EnvironmentTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var osDescription = await client.GetStringAsync("/env");
+        var osDescription = await client.GetStringAsync("/umgebung");
 
         // Should contain some indication of OS type
         Assert.IsTrue(
