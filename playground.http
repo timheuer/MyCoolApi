@@ -34,3 +34,12 @@ GET http://localhost:5250/casing/hello/invalid
 
 ### Test with special characters and mixed formats
 GET http://localhost:5250/casing/my-cool_API_example/pascal
+
+###
+
+# PowerBall Lottery API
+# Generates winning PowerBall lottery numbers
+# 5 unique white balls (1-69) and 1 PowerBall (1-26)
+
+### Generate PowerBall numbers
+GET http://localhost:5250/powerball
