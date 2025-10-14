@@ -2,35 +2,74 @@ GET https://www.thunderclient.com/welcome
 
 ###
 
-# String Casing API Tests
-# Demo of the new string casing conversion endpoints
+# String Casing API Tests / Zeichenketten-Schreibweise API Tests
+# Demo of the new string casing conversion endpoints / Demo der neuen Zeichenketten-Umwandlungsendpunkte
 
-### Convert to PascalCase
-GET http://localhost:5250/casing/hello_world_test/pascal
+### Convert to PascalCase / Konvertiere zu PascalCase
+GET http://localhost:5250/schreibweise/hello_world_test/pascal
 
-### Convert to camelCase
-GET http://localhost:5250/casing/hello_world_test/camel
+### Convert to camelCase / Konvertiere zu camelCase
+GET http://localhost:5250/schreibweise/hello_world_test/camel
 
-### Convert to snake_case
-GET http://localhost:5250/casing/HelloWorldTest/snake
+### Convert to snake_case / Konvertiere zu snake_case
+GET http://localhost:5250/schreibweise/HelloWorldTest/snake
 
-### Convert to kebab-case
-GET http://localhost:5250/casing/HelloWorldTest/kebab
+### Convert to kebab-case / Konvertiere zu kebab-case
+GET http://localhost:5250/schreibweise/HelloWorldTest/kebab
 
-### Convert to sentence case
-GET http://localhost:5250/casing/HelloWorldTest/sentence
+### Convert to sentence case / Konvertiere zu Satz-Schreibweise
+GET http://localhost:5250/schreibweise/HelloWorldTest/sentence
 
-### Convert to Title Case
-GET http://localhost:5250/casing/hello_world_test/title
+### Convert to Title Case / Konvertiere zu Titel-Schreibweise
+GET http://localhost:5250/schreibweise/hello_world_test/title
 
-### Convert to UPPER_CASE
-GET http://localhost:5250/casing/HelloWorldTest/upper
+### Convert to UPPER_CASE / Konvertiere zu GROSS_SCHREIBUNG
+GET http://localhost:5250/schreibweise/HelloWorldTest/upper
 
-### Convert to lowercase
-GET http://localhost:5250/casing/HelloWorldTest/lower
+### Convert to lowercase / Konvertiere zu kleinschreibung
+GET http://localhost:5250/schreibweise/HelloWorldTest/lower
 
-### Test error handling with invalid case type
-GET http://localhost:5250/casing/hello/invalid
+### Test error handling with invalid case type / Teste Fehlerbehandlung mit ungültigem Schreibweise-Typ
+GET http://localhost:5250/schreibweise/hello/invalid
 
-### Test with special characters and mixed formats
-GET http://localhost:5250/casing/my-cool_API_example/pascal
+### Test with special characters and mixed formats / Teste mit Sonderzeichen und gemischten Formaten
+GET http://localhost:5250/schreibweise/my-cool_API_example/pascal
+
+###
+
+# Math API Tests / Mathematik API Tests
+
+### Add two numbers / Addiere zwei Zahlen
+GET http://localhost:5250/addieren/5,3
+
+### Multiply two numbers / Multipliziere zwei Zahlen
+GET http://localhost:5250/multiplizieren/4,5
+
+### Halve a number / Halbiere eine Zahl
+GET http://localhost:5250/halbieren/12
+
+### Double a number / Verdopple eine Zahl
+GET http://localhost:5250/verdoppeln/7
+
+### Calculate Fibonacci sequence / Berechne Fibonacci-Folge
+GET http://localhost:5250/fibonacci/5
+
+###
+
+# Greeting API Tests / Begrüßungs API Tests
+
+### Say hello in German / Sage Hallo auf Deutsch
+GET http://localhost:5250/hallo/johann
+
+### Say goodbye in German / Sage Tschüss auf Deutsch
+GET http://localhost:5250/tschuess/maria
+
+###
+
+# System Information / System-Information
+
+### Get environment information / Hole Umgebungsinformationen
+GET http://localhost:5250/umgebung
+
+### Get weather forecast / Hole Wettervorhersage
+GET http://localhost:5250/wettervorhersage

@@ -6,71 +6,71 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+var anwendung = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// HTTP-Request-Pipeline konfigurieren.
+if (anwendung.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    anwendung.UseSwagger();
+    anwendung.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+anwendung.UseHttpsRedirection();
 
-var summaries = new[]
+var wetterZusammenfassungen = new[]
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    "Eiskalt", "Frisch", "Kühl", "Mild", "Angenehm", "Warm", "Heiss", "Sehr heiss", "Schwül", "Glühend"
 };
 
-app.MapGet("/add/{num1},{num2}", (int num1, int num2) =>
+anwendung.MapGet("/addieren/{zahl1},{zahl2}", (int zahl1, int zahl2) =>
 {
 
-    var result = MathHelpers.Add(num1, num2);
-    return result;
+    var ergebnis = MathHelfers.Addieren(zahl1, zahl2);
+    return ergebnis;
 });
 
-app.MapGet("/fibonacci/{num}", (int num) =>
+anwendung.MapGet("/fibonacci/{zahl}", (int zahl) =>
 {
-    return MathHelpers.Fibonacci(num);
+    return MathHelfers.Fibonacci(zahl);
 });
 
-app.MapGet("/multiply/{num1},{num2}", (int num1, int num2) =>
+anwendung.MapGet("/multiplizieren/{zahl1},{zahl2}", (int zahl1, int zahl2) =>
 {
-    return MathHelpers.Multiply(num1, num2);
+    return MathHelfers.Multiplizieren(zahl1, zahl2);
 });
 
-app.MapGet("/doubleit/{num1}", (int num1) =>
+anwendung.MapGet("/verdoppeln/{zahl1}", (int zahl1) =>
 {
-    return MathHelpers.MultiplyByTwo(num1);
+    return MathHelfers.Verdoppeln(zahl1);
 });
 
-app.MapGet("/hello/{name}", (string name) =>
+anwendung.MapGet("/hallo/{name}", (string name) =>
 {
-    return HelloBuilders.SayHello(name);
+    return HelloBuilders.SagHallo(name);
 });
 
-app.MapGet("/bye/{name}", (string name) =>
+anwendung.MapGet("/tschuess/{name}", (string name) =>
 {
-    return HelloBuilders.SayGoodbye(name);
+    return HelloBuilders.SagTschuess(name);
 });
 
-app.MapGet("/env", () =>
+anwendung.MapGet("/umgebung", () =>
 {
 
     return RuntimeInformation.OSDescription;
 });
 
-app.MapGet("/divide/{num1}", (int num1) =>
+anwendung.MapGet("/halbieren/{zahl1}", (int zahl1) =>
 {
-    return MathHelpers.DivideInHalf(num1);
+    return MathHelfers.Halbieren(zahl1);
 });
 
-app.MapGet("/casing/{input}/{caseType}", (string input, string caseType) =>
+anwendung.MapGet("/schreibweise/{eingabe}/{schreibweiseTyp}", (string eingabe, string schreibweiseTyp) =>
 {
     try
     {
-        var result = StringCasingHelpers.ConvertCase(input, caseType);
-        return Results.Ok(result);
+        var ergebnis = StringCasingHelpers.KonvertiereSchreibweise(eingabe, schreibweiseTyp);
+        return Results.Ok(ergebnis);
     }
     catch (ArgumentException ex)
     {
@@ -78,25 +78,25 @@ app.MapGet("/casing/{input}/{caseType}", (string input, string caseType) =>
     }
 });
 
-app.MapGet("/weatherforecast", () =>
+anwendung.MapGet("/wettervorhersage", () =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
+    var vorhersage = Enumerable.Range(1, 5).Select(index =>
+        new Wettervorhersage
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
             Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
+            wetterZusammenfassungen[Random.Shared.Next(wetterZusammenfassungen.Length)]
         ))
         .ToArray();
-    return forecast;
+    return vorhersage;
 })
-.WithName("GetWeatherForecast");
+.WithName("HoleWettervorhersage");
 
-app.Run();
+anwendung.Run();
 
-public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+public record Wettervorhersage(DateOnly Datum, int TemperaturC, string? Zusammenfassung)
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    public int TemperaturF => 32 + (int)(TemperaturC / 0.5556);
 }
 
 public partial class Program { }

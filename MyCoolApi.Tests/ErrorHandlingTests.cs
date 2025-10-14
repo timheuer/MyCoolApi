@@ -11,7 +11,7 @@ public class ErrorHandlingTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var response = await client.GetAsync("/add/abc,def");
+        var response = await client.GetAsync("/addieren/abc,def");
         Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
@@ -21,7 +21,7 @@ public class ErrorHandlingTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var response = await client.GetAsync("/multiply/not-a-number,5");
+        var response = await client.GetAsync("/multiplizieren/not-a-number,5");
         Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
@@ -54,7 +54,7 @@ public class ErrorHandlingTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var response = await client.GetAsync("/divide/not-a-number");
+        var response = await client.GetAsync("/halbieren/not-a-number");
         Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
@@ -64,7 +64,7 @@ public class ErrorHandlingTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var response = await client.GetAsync("/doubleit/invalid");
+        var response = await client.GetAsync("/verdoppeln/invalid");
         Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
@@ -74,7 +74,7 @@ public class ErrorHandlingTests
         await using var application = new MyCoolApiApp();
         var client = application.CreateClient();
 
-        var response = await client.GetAsync("/hello/");
+        var response = await client.GetAsync("/hallo/");
         // This should return NotFound since the route doesn't match
         Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
     }
