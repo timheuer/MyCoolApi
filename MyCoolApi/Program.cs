@@ -96,7 +96,9 @@ app.MapGet("/powerball", () =>
 {
     return PowerBallHelpers.GenerateNumbers();
 })
-.WithName("GetPowerBall");
+.WithName("GetPowerBall")
+.WithSummary("Generate PowerBall lottery numbers")
+.WithDescription("Generates a set of PowerBall lottery numbers: 5 unique white balls (1-69) and 1 PowerBall (1-26)");
 
 app.Run();
 
