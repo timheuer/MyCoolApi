@@ -92,6 +92,12 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
+app.MapGet("/powerball", () =>
+{
+    return PowerBallHelpers.GenerateNumbers();
+})
+.WithName("GetPowerBall");
+
 app.Run();
 
 public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
