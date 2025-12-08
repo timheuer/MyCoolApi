@@ -1,0 +1,42 @@
+  Run tests: 'D:\source\repos\MyCoolApi\MyCoolApi.Tests\bin\Release\net10.0\MyCoolApi.Tests.dll' [net10.0|x64]
+  MSTest v3.9.0 (UTC 07-May-25) [win-x64 - .NET 10.0.0-rc.2.25502.107]
+  [+39/x0/?0] MyCoolApi.Tests.dll (net10.0|x64) - Multiply_Endpoint_With_Zero (3s)
+  
+  skipped Running_On_Linux (0ms)
+    Test is only supported on Linux
+  skipped Running_In_WSL (0ms)
+    Standard output
+      
+      
+      TestContext Messages:
+      Test is only supported on WSL
+    Error output
+  skipped Running_On_MacOS (0ms)
+    Test is only supported on OSX
+  failed AlternatingCapsApi_WithSpaces_Success (51ms)
+    Assert.AreEqual failed. Expected:<"HeL wOrLd">. Actual:<"HeLlO wOrLd">. 
+      at MyCoolApi.Tests.StringCasingTests.AlternatingCapsApi_WithSpaces_Success() in D:\source\repos\MyCoolApi\MyCoolApi.Tests\StringCasingTests.cs:306
+      at MyCoolApi.Tests.StringCasingTests.AlternatingCapsApi_WithSpaces_Success() in D:\source\repos\MyCoolApi\MyCoolApi.Tests\StringCasingTests.cs:306
+      --- End of stack trace from previous location ---
+      
+    Standard output
+      warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+            Failed to determine the https port for redirect.
+      
+    Error output
+D:\source\repos\MyCoolApi\MyCoolApi.Tests\StringCasingTests.cs(306): error test failed: AlternatingCapsApi_WithSpaces_Success (51ms): Assert.AreEqual failed. Expected:<"HeL wOrLd">. Actual:<"HeLlO wOrLd">.  [D:\source\repos\MyCoolApi\MyCoolApi.Tests\MyCoolApi.Tests.csproj]
+D:\source\repos\MyCoolApi\MyCoolApi.Tests\StringCasingTests.cs(306): error test failed: Stack Trace: [D:\source\repos\MyCoolApi\MyCoolApi.Tests\MyCoolApi.Tests.csproj]
+D:\source\repos\MyCoolApi\MyCoolApi.Tests\StringCasingTests.cs(306): error test failed:    at MyCoolApi.Tests.StringCasingTests.AlternatingCapsApi_WithSpaces_Success() in D:\source\repos\MyCoolApi\MyCoolApi.Tests\StringCasingTests.cs:line 306 [D:\source\repos\MyCoolApi\MyCoolApi.Tests\MyCoolApi.Tests.csproj]
+D:\source\repos\MyCoolApi\MyCoolApi.Tests\StringCasingTests.cs(306): error test failed:    at MyCoolApi.Tests.StringCasingTests.AlternatingCapsApi_WithSpaces_Success() in D:\source\repos\MyCoolApi\MyCoolApi.Tests\StringCasingTests.cs:line 306 [D:\source\repos\MyCoolApi\MyCoolApi.Tests\MyCoolApi.Tests.csproj]
+D:\source\repos\MyCoolApi\MyCoolApi.Tests\StringCasingTests.cs(306): error test failed: --- End of stack trace from previous location --- [D:\source\repos\MyCoolApi\MyCoolApi.Tests\MyCoolApi.Tests.csproj]
+D:\source\repos\MyCoolApi\MyCoolApi.Tests\StringCasingTests.cs(306): error test failed:  [D:\source\repos\MyCoolApi\MyCoolApi.Tests\MyCoolApi.Tests.csproj]
+D:\source\repos\MyCoolApi\MyCoolApi.Tests\StringCasingTests.cs(306): error test failed:  [D:\source\repos\MyCoolApi\MyCoolApi.Tests\MyCoolApi.Tests.csproj]
+  Failed! - Failed: 1, Passed: 90, Skipped: 3, Total: 94, Duration: 3s 715ms - MyCoolApi.Tests.dll (net10.0|x64)
+  
+  Test run summary: Failed! - D:\source\repos\MyCoolApi\MyCoolApi.Tests\bin\Release\net10.0\MyCoolApi.Tests.dll (net10.0|x64)
+    total: 94
+    failed: 1
+    succeeded: 90
+    skipped: 3
+    duration: 3s 756ms
+D:\source\repos\MyCoolApi\MyCoolApi.Tests\bin\Release\net10.0\MyCoolApi.Tests.dll : error run failed: Tests failed: 'D:\source\repos\MyCoolApi\MyCoolApi.Tests\bin\Release\net10.0\TestResults\MyCoolApi.Tests_net10.0_x64.log' [net10.0|x64] [D:\source\repos\MyCoolApi\MyCoolApi.Tests\MyCoolApi.Tests.csproj]

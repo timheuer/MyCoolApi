@@ -254,4 +254,30 @@ public class MathTests
         var result = await client.GetStringAsync("/divide/-8");
         Assert.AreEqual(-4.0, Convert.ToDouble(result));
     }
+
+    [TestMethod]
+    public void RoundToHundredth_Tests()
+    {
+        Assert.AreEqual(3.14, MathHelpers.RoundToHundredth(3.14159));
+        Assert.AreEqual(2.35, MathHelpers.RoundToHundredth(2.3456));
+        Assert.AreEqual(1.00, MathHelpers.RoundToHundredth(1.0));
+        Assert.AreEqual(0.13, MathHelpers.RoundToHundredth(0.125));
+        Assert.AreEqual(-2.46, MathHelpers.RoundToHundredth(-2.456));
+    }
+
+    [TestMethod]
+    public async Task Round_Endpoint_Tests()
+    {
+        await using var application = new MyCoolApiApp();
+        var client = application.CreateClient();
+
+        var result1 = await client.GetStringAsync("/round/3.14159");
+        Assert.AreEqual(3.14, Convert.ToDouble(result1));
+
+        var result2 = await client.GetStringAsync("/round/2.3456");
+        Assert.AreEqual(2.35, Convert.ToDouble(result2));
+
+        var result3 = await client.GetStringAsync("/round/1.0");
+        Assert.AreEqual(1.0, Convert.ToDouble(result3));
+    }
 }

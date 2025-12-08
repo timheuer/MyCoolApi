@@ -45,4 +45,9 @@ public class MathHelpers
     {
         return number * 2;
     }
+
+    public static double RoundToHundredth(double number)
+    {
+        return Math.Round(number, 2);
+    }
 }

@@ -48,4 +48,28 @@ public class StringCasingHelpers
     public static string ToSentenceCase(string input) => input.Humanize();
     public static string ToTitleCase(string input) => input.Titleize();
     public static string ToUpperCase(string input) => input.Underscore().ToUpperInvariant();
+
+    public static string CapitalizeEveryOtherLetter(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+            return input;
+
+        var result = new System.Text.StringBuilder();
+        bool capitalizeNext = true;
+
+        foreach (char c in input)
+        {
+            if (char.IsLetter(c))
+            {
+                result.Append(capitalizeNext ? char.ToUpperInvariant(c) : char.ToLowerInvariant(c));
+                capitalizeNext = !capitalizeNext;
+            }
+            else
+            {
+                result.Append(c);
+            }
+        }
+
+        return result.ToString();
+    }
 }

@@ -237,4 +237,72 @@ public class StringCasingTests
         var response = await client.GetAsync("/casing/hello/invalid");
         Assert.AreEqual(System.Net.HttpStatusCode.BadRequest, response.StatusCode);
     }
+
+    // AlternatingCaps tests
+    [TestMethod]
+    public void CapitalizeEveryOtherLetter_SimpleString_Success()
+    {
+        Assert.AreEqual("HeLlO", StringCasingHelpers.CapitalizeEveryOtherLetter("hello"));
+        Assert.AreEqual("WoRlD", StringCasingHelpers.CapitalizeEveryOtherLetter("world"));
+    }
+
+    [TestMethod]
+    public void CapitalizeEveryOtherLetter_WithSpaces_Success()
+    {
+        Assert.AreEqual("HeLlO wOrLd", StringCasingHelpers.CapitalizeEveryOtherLetter("hello world"));
+    }
+
+    [TestMethod]
+    public void CapitalizeEveryOtherLetter_WithNumbers_Success()
+    {
+        Assert.AreEqual("He1Lo 2Or3Ld", StringCasingHelpers.CapitalizeEveryOtherLetter("he1lo 2or3ld"));
+    }
+
+    [TestMethod]
+    public void CapitalizeEveryOtherLetter_WithSpecialChars_Success()
+    {
+        Assert.AreEqual("HeL!wOrLd?", StringCasingHelpers.CapitalizeEveryOtherLetter("hel!world?"));
+    }
+
+    [TestMethod]
+    public void CapitalizeEveryOtherLetter_EmptyString_ReturnsEmpty()
+    {
+        Assert.AreEqual("", StringCasingHelpers.CapitalizeEveryOtherLetter(""));
+    }
+
+    [TestMethod]
+    public void CapitalizeEveryOtherLetter_NullString_ReturnsNull()
+    {
+        Assert.IsNull(StringCasingHelpers.CapitalizeEveryOtherLetter(null!));
+    }
+
+    [TestMethod]
+    public void CapitalizeEveryOtherLetter_WhitespaceOnly_ReturnsWhitespace()
+    {
+        Assert.AreEqual("   ", StringCasingHelpers.CapitalizeEveryOtherLetter("   "));
+    }
+
+    [TestMethod]
+    public async Task AlternatingCapsApi_SimpleString_Success()
+    {
+        await using var application = new MyCoolApiApp();
+        var client = application.CreateClient();
+
+        var response = await client.GetAsync("/alternating-caps/hello");
+        response.EnsureSuccessStatusCode();
+        var content = await response.Content.ReadAsStringAsync();
+        Assert.AreEqual("\"HeLlO\"", content);
+    }
+
+    [TestMethod]
+    public async Task AlternatingCapsApi_WithSpaces_Success()
+    {
+        await using var application = new MyCoolApiApp();
+        var client = application.CreateClient();
+
+        var response = await client.GetAsync("/alternating-caps/hello%20world");
+        response.EnsureSuccessStatusCode();
+        var content = await response.Content.ReadAsStringAsync();
+        Assert.AreEqual("\"HeLlO wOrLd\"", content);
+    }
 }

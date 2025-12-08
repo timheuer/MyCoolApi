@@ -65,6 +65,11 @@ app.MapGet("/divide/{num1}", (int num1) =>
     return MathHelpers.DivideInHalf(num1);
 });
 
+app.MapGet("/round/{num}", (double num) =>
+{
+    return MathHelpers.RoundToHundredth(num);
+});
+
 app.MapGet("/casing/{input}/{caseType}", (string input, string caseType) =>
 {
     try
@@ -76,6 +81,12 @@ app.MapGet("/casing/{input}/{caseType}", (string input, string caseType) =>
     {
         return Results.BadRequest(ex.Message);
     }
+});
+
+app.MapGet("/alternating-caps/{input}", (string input) =>
+{
+    var result = StringCasingHelpers.CapitalizeEveryOtherLetter(input);
+    return Results.Ok(result);
 });
 
 app.MapGet("/weatherforecast", () =>
