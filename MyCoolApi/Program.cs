@@ -103,6 +103,11 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
+app.MapGet("/format/{input}", (string input) =>
+{
+    return StringFormatHelpers.FormatWithSpacesAndExclamations(input);
+});
+
 app.Run();
 
 public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
