@@ -48,6 +48,6 @@ public class MathHelpers
 
     public static double RoundToHundredth(double number)
     {
-        return Math.Round(number, 2);
+        return Math.Round(number, 2, MidpointRounding.AwayFromZero);
     }
 }
