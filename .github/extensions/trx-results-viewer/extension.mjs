@@ -306,6 +306,13 @@ function renderHtml(initialFilePath = "") {
   --green: var(--true-color-green, #1a7f37);
   --red: var(--true-color-red, #cf222e);
   --yellow: var(--true-color-yellow, #9a6700);
+  --green-bg: color-mix(in srgb, var(--green) 12%, transparent);
+  --green-border: color-mix(in srgb, var(--green) 42%, var(--border));
+  --red-bg: color-mix(in srgb, var(--red) 12%, transparent);
+  --red-border: color-mix(in srgb, var(--red) 42%, var(--border));
+  --yellow-bg: color-mix(in srgb, var(--yellow) 14%, transparent);
+  --yellow-border: color-mix(in srgb, var(--yellow) 42%, var(--border));
+  --focus-bg: color-mix(in srgb, var(--focus) 10%, transparent);
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -341,19 +348,19 @@ button, select, input {
 }
 .header {
   border-bottom: 1px solid var(--border);
-  padding: 16px 20px;
+  padding: 10px 20px 12px;
 }
 .title {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 h1 {
   margin: 0;
-  font-size: var(--text-title-large, 24px);
-  line-height: var(--leading-title-large, 32px);
+  font-size: var(--text-title-medium, 20px);
+  line-height: var(--leading-title-medium, 28px);
 }
 .muted {
   color: var(--text-muted);
@@ -361,7 +368,7 @@ h1 {
 .toolbar {
   display: grid;
   grid-template-columns: minmax(160px, 1fr) auto auto;
-  gap: 8px;
+  gap: 6px;
 }
 .select, .search {
   width: 100%;
@@ -369,7 +376,7 @@ h1 {
   border-radius: 8px;
   background: var(--surface);
   color: var(--text);
-  padding: 8px 10px;
+  padding: 6px 10px;
 }
 .button {
   border: 1px solid var(--border);
@@ -377,7 +384,7 @@ h1 {
   background: var(--surface-muted);
   color: var(--text);
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 6px 12px;
 }
 .button:hover {
   background: var(--surface-hover);
@@ -413,6 +420,23 @@ h1 {
   height: 86px;
   max-height: 86px;
   min-height: 86px;
+  overflow: hidden;
+  position: relative;
+}
+.summary .card::before {
+  background: var(--focus);
+  content: "";
+  height: 4px;
+  inset: 0 0 auto;
+  opacity: 0;
+  position: absolute;
+  transition: opacity .12s ease;
+}
+.summary .card.filter-Passed::before { background: var(--green); }
+.summary .card.filter-Failed::before { background: var(--red); }
+.summary .card.filter-NotExecuted::before { background: var(--yellow); }
+.summary .card.active::before {
+  opacity: 1;
 }
 .card.button:hover {
   background: var(--surface-muted);
@@ -420,9 +444,24 @@ h1 {
   box-shadow: inset 0 0 0 1px var(--focus);
 }
 .card.button.active {
-  background: var(--surface-muted);
+  background: var(--focus-bg);
   border-color: var(--focus);
   box-shadow: inset 0 0 0 1px var(--focus);
+}
+.card.button.active.filter-Passed {
+  background: var(--green-bg);
+  border-color: var(--green-border);
+  box-shadow: inset 0 0 0 1px var(--green-border);
+}
+.card.button.active.filter-Failed {
+  background: var(--red-bg);
+  border-color: var(--red-border);
+  box-shadow: inset 0 0 0 1px var(--red-border);
+}
+.card.button.active.filter-NotExecuted {
+  background: var(--yellow-bg);
+  border-color: var(--yellow-border);
+  box-shadow: inset 0 0 0 1px var(--yellow-border);
 }
 .metric {
   font-size: 28px;
@@ -445,6 +484,8 @@ h1 {
 }
 .ledger-header {
   align-items: center;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-muted);
   color: var(--text-muted);
   display: grid;
   font-size: 12px;
@@ -452,8 +493,11 @@ h1 {
   gap: 12px;
   grid-template-columns: minmax(220px, 1fr) minmax(120px, 18%) 92px 112px;
   letter-spacing: .04em;
-  padding: 0 14px 4px 22px;
+  padding: 2px 14px 8px 22px;
+  position: sticky;
+  top: 0;
   text-transform: uppercase;
+  z-index: 2;
 }
 .row {
   background: var(--surface);
@@ -524,8 +568,21 @@ h1 {
   line-height: 16px;
   padding: 2px 8px;
 }
-.pill.Passed { color: var(--green); }
-.pill.Failed, .pill.Error, .pill.Timeout { color: var(--red); }
+.pill.Passed {
+  background: var(--green-bg);
+  border-color: var(--green-border);
+  color: var(--green);
+}
+.pill.Failed, .pill.Error, .pill.Timeout {
+  background: var(--red-bg);
+  border-color: var(--red-border);
+  color: var(--red);
+}
+.pill.NotExecuted {
+  background: var(--yellow-bg);
+  border-color: var(--yellow-border);
+  color: var(--yellow);
+}
 .drawer {
   border-top: 1px solid var(--border-muted);
   display: grid;
@@ -553,10 +610,24 @@ h1 {
   align-items: center;
   color: var(--text-muted);
   display: flex;
+  flex-direction: column;
+  gap: 12px;
   justify-content: center;
   min-height: 240px;
   padding: 32px;
   text-align: center;
+}
+.empty-action {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text);
+  cursor: pointer;
+  padding: 6px 12px;
+}
+.empty-action:hover {
+  background: var(--surface-hover);
+  border-color: var(--focus);
 }
 .tabs {
   display: flex;
@@ -711,6 +782,15 @@ function filteredResults() {
   });
 }
 
+function filterLabel(filter) {
+  return {
+    all: "all results",
+    Passed: "passed tests",
+    Failed: "failed tests",
+    NotExecuted: "skipped tests",
+  }[filter] || filter;
+}
+
 function renderSummary() {
   const counts = state.data.counts;
   document.getElementById("summary").innerHTML = [
@@ -722,14 +802,19 @@ function renderSummary() {
   ].map(([label, value, css, filter]) => {
     const active = filter && state.filter === filter;
     const filterAttrs = filter ? ' data-filter="' + filter + '" aria-pressed="' + active + '"' : ' aria-disabled="true"';
-    return '<button class="card button ' + (active ? "active" : "") + '" type="button"' + filterAttrs + '><div class="metric ' + css + '">' + value + '</div><div class="muted">' + label + '</div></button>';
+    const filterClass = filter ? " filter-" + filter : "";
+    return '<button class="card button ' + (active ? "active" : "") + filterClass + '" type="button"' + filterAttrs + '><div class="metric ' + css + '">' + value + '</div><div class="muted">' + label + '</div></button>';
   }).join("");
 }
 
 function renderList(results) {
   const container = document.getElementById("results");
   if (!results.length) {
-    container.innerHTML = '<div class="empty">No matching test results.</div>';
+    const scopedMessage = state.filter === "all"
+      ? "No matching test results."
+      : "No " + filterLabel(state.filter) + " match the current view.";
+    const action = state.filter === "all" ? "" : '<button class="empty-action" type="button" data-clear-filter>Show all results</button>';
+    container.innerHTML = '<div class="empty"><div>' + escapeHtml(scopedMessage) + '</div>' + action + '</div>';
     return;
   }
   state.selectedIndex = Math.min(state.selectedIndex, results.length - 1);
@@ -799,6 +884,14 @@ document.getElementById("summary").addEventListener("click", (event) => {
   render();
 });
 document.getElementById("results").addEventListener("click", (event) => {
+  const clearFilter = event.target.closest("[data-clear-filter]");
+  if (clearFilter) {
+    state.filter = "all";
+    state.selectedIndex = 0;
+    render();
+    return;
+  }
+
   const row = event.target.closest("[data-index]");
   if (!row) return;
   state.selectedIndex = Number(row.dataset.index);
